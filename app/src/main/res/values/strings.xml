@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">GoodJob</string>
+    <!-- activity signup  -->
+    <string name="activity_signup_info">가입을 해야 \n 우리 만의 다이어리를 만들 수 있어!</string>
+    <string name="activity_signup_user_name">사용자 이름</string>
+    <string name="activity_signup_user_ID">아이디</string>
+    <string name="activity_signup_user_password">비밀번호</string>
+    <string name="activity_signup_btnSignup">회원가입</string>
+    <string name="activity_signup_info2">이미 계정이 있다면</string>
+    <string name="activity_signup_btnLogin">로그인</string>
+    <string name="activity_signup_etInputType">0123456789_qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM</string>
+    <!-- activity emotion statistics -->
+    <string name="activity_emotion_statistics_tvMonth">N월</string>
+    <string name="activity_emotion_statistics_tvFirst">1위</string>
+    <string name="activity_emotion_statistics_tvSecond">2위</string>
+    <string name="activity_emotion_statistics_tvThird">3위</string>
+    <string name="activity_emotion_statistics_rvTextView">N개</string>
 </resources>
