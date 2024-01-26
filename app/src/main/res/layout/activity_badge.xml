@@ -7,47 +7,47 @@
     android:background="#181243">
 
     <TextView
-        android:id="@+id/textView1week"
+        android:id="@+id/activity_badge_1weekText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="68dp"
         android:text="일주일 동안 칭찬을 했어요."
-        app:layout_constraintStart_toEndOf="@+id/imageView7"
-        app:layout_constraintTop_toBottomOf="@+id/textView3days" />
+        app:layout_constraintStart_toEndOf="@+id/activity_badge_1weekImage"
+        app:layout_constraintTop_toBottomOf="@+id/activity_badge_3daysText" />
 
     <TextView
-        android:id="@+id/textView21days"
+        android:id="@+id/activity_badge_21daysText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="68dp"
         android:text="21일째 - 행동이 습관화되는 시간."
-        app:layout_constraintStart_toEndOf="@+id/imageView8"
-        app:layout_constraintTop_toBottomOf="@+id/textView1week" />
+        app:layout_constraintStart_toEndOf="@+id/activity_badge_21daysImage"
+        app:layout_constraintTop_toBottomOf="@+id/activity_badge_1weekText" />
 
     <TextView
-        android:id="@+id/textView66days"
+        android:id="@+id/activity_badge_66daysText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="68dp"
         android:text="66일째 - 습관이 자리잡는 시간."
-        app:layout_constraintStart_toEndOf="@+id/imageView9"
-        app:layout_constraintTop_toBottomOf="@+id/textView21days" />
+        app:layout_constraintStart_toEndOf="@+id/activity_badge_66daysImage"
+        app:layout_constraintTop_toBottomOf="@+id/activity_badge_21daysText" />
 
     <TextView
-        android:id="@+id/textView100days"
+        android:id="@+id/activity_badge_100daysText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="68dp"
         android:text="100일 동안 칭찬을 했어요!"
-        app:layout_constraintStart_toEndOf="@+id/imageView10"
-        app:layout_constraintTop_toBottomOf="@+id/textView66days" />
+        app:layout_constraintStart_toEndOf="@+id/activity_badge_100daysImage"
+        app:layout_constraintTop_toBottomOf="@+id/activity_badge_66daysText" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/activity_badge_drawerImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -58,7 +58,7 @@
         app:srcCompat="@drawable/ic_calendar_dehaze" />
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/activity_badge_mascotImage"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="30dp"
@@ -68,7 +68,7 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/textView0"
+        android:id="@+id/activity_badge_mainText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -78,31 +78,31 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+        app:layout_constraintTop_toBottomOf="@+id/activity_badge_mascotImage" />
 
     <TextView
-        android:id="@+id/textView3days"
+        android:id="@+id/activity_badge_3daysText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="80dp"
         android:text="삼일 넘게 칭찬을 했어요."
         android:textColor="#FFFFFF"
-        app:layout_constraintStart_toEndOf="@+id/imageView6"
-        app:layout_constraintTop_toBottomOf="@+id/textView0" />
+        app:layout_constraintStart_toEndOf="@+id/activity_badge_3daysImage"
+        app:layout_constraintTop_toBottomOf="@+id/activity_badge_mainText" />
 
     <ImageView
-        android:id="@+id/imageView6"
+        android:id="@+id/activity_badge_3daysImage"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="60dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView0"
+        app:layout_constraintTop_toBottomOf="@+id/activity_badge_mainText"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/textView101"
+        android:id="@+id/activity_badge_3daysTitle"
         android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
@@ -112,20 +112,20 @@
         android:textColor="#FFFFFF"
         android:textSize="10sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+        app:layout_constraintTop_toBottomOf="@+id/activity_badge_3daysImage" />
 
     <ImageView
-        android:id="@+id/imageView7"
+        android:id="@+id/activity_badge_1weekImage"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView101"
+        app:layout_constraintTop_toBottomOf="@+id/activity_badge_3daysTitle"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/textView102"
+        android:id="@+id/activity_badge_1weekTitle"
         android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
@@ -134,20 +134,20 @@
         android:textColor="#FFFFFF"
         android:textSize="10sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView7" />
+        app:layout_constraintTop_toBottomOf="@+id/activity_badge_1weekImage" />
 
     <ImageView
-        android:id="@+id/imageView10"
+        android:id="@+id/activity_badge_100daysImage"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView104"
+        app:layout_constraintTop_toBottomOf="@+id/activity_badge_66daysTitle"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/textView105"
+        android:id="@+id/activity_badge_100daysTitle"
         android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
@@ -156,20 +156,20 @@
         android:textColor="#FFFFFF"
         android:textSize="10sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView10" />
+        app:layout_constraintTop_toBottomOf="@+id/activity_badge_100daysImage" />
 
     <ImageView
-        android:id="@+id/imageView9"
+        android:id="@+id/activity_badge_66daysImage"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView103"
+        app:layout_constraintTop_toBottomOf="@+id/activity_badge_21daysTitle"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/textView104"
+        android:id="@+id/activity_badge_66daysTitle"
         android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
@@ -178,20 +178,20 @@
         android:textColor="#FFFFFF"
         android:textSize="10sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView9" />
+        app:layout_constraintTop_toBottomOf="@+id/activity_badge_66daysImage" />
 
     <ImageView
-        android:id="@+id/imageView8"
+        android:id="@+id/activity_badge_21daysImage"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView102"
+        app:layout_constraintTop_toBottomOf="@+id/activity_badge_1weekTitle"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/textView103"
+        android:id="@+id/activity_badge_21daysTitle"
         android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
@@ -200,6 +200,6 @@
         android:textColor="#FFFFFF"
         android:textSize="10sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+        app:layout_constraintTop_toBottomOf="@+id/activity_badge_21daysImage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
