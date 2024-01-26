@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignUpActivity">
+
+    <!-- Main Character Icon & Info -->
+    <LinearLayout
+        android:id="@+id/activity_signup_llCharacter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/activity_signup_ivMainCharacter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_person_24" />
+
+        <TextView
+            android:id="@+id/activity_signup_tvInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:text="@string/activity_signup_info" />
+    </LinearLayout>
+
+    <!-- User Info Input -->
+    <LinearLayout
+        android:id="@+id/activity_signup_llUserInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/activity_signup_llCharacter">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:stretchColumns="*">
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/activity_signup_user_name"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/activity_signup_etUserName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="30dp"
+                    android:layout_span="3"
+                    android:background="@drawable/bg_activity_signup_edittext"
+                    android:inputType="textPersonName"
+                    android:paddingLeft="16dp" />
+            </TableRow>
+
+            <TableRow android:layout_marginTop="30dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/activity_signup_user_ID"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/activity_signup_etUserID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="30dp"
+                    android:layout_span="3"
+                    android:background="@drawable/bg_activity_signup_edittext"
+                    android:digits="@string/activity_signup_etInputType"
+                    android:maxLines="1"
+                    android:paddingLeft="16dp" />
+            </TableRow>
+
+            <TableRow android:layout_marginTop="30dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/activity_signup_user_password"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/activity_signup_etUserPassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="30dp"
+                    android:layout_span="3"
+                    android:background="@drawable/bg_activity_signup_edittext"
+                    android:digits="@string/activity_signup_etInputType"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:paddingLeft="16dp" />
+            </TableRow>
+        </TableLayout>
+
+        <Button
+            android:id="@+id/activity_signup_btnSignUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/activity_signup_btnSignup" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activity_signup_llUserInfo">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_signup_info2" />
+
+        <Button
+            android:id="@+id/activity_signup_btnLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/activity_signup_btnLogin" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
