@@ -8,7 +8,7 @@
     <string name="activity_signup_btnSignup">회원가입</string>
     <string name="activity_signup_info2">이미 계정이 있다면</string>
     <string name="activity_signup_btnLogin">로그인</string>
-    <string name="activity_signup_etInputType">0123456789_qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM</string>
+    <string name="activity_signup_etInputType">0123456789_qwertyuiopasdfghjklzxcvbnm!QWERTYUIOPASDFGHJKLZXCVBNM</string>
     <!-- activity emotion statistics -->
     <string name="activity_emotion_statistics_tvMonth">N월</string>
     <string name="activity_emotion_statistics_tvFirst">1위</string>
