@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#181243">
+    android:background="#FFFFFF">
 
     <TextView
         android:id="@+id/activity_badge_1weekText"
@@ -12,7 +12,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="68dp"
-        android:text="일주일 동안 칭찬을 했어요."
+        android:text="7일 - 일주일간의 시작."
+        android:textColor="#AEAEAE"
         app:layout_constraintStart_toEndOf="@+id/activity_badge_1weekImage"
         app:layout_constraintTop_toBottomOf="@+id/activity_badge_3daysText" />
 
@@ -22,7 +23,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="68dp"
-        android:text="21일째 - 행동이 습관화되는 시간."
+        android:text="21일 - 행동이 습관화되는 시간."
+        android:textColor="#AEAEAE"
         app:layout_constraintStart_toEndOf="@+id/activity_badge_21daysImage"
         app:layout_constraintTop_toBottomOf="@+id/activity_badge_1weekText" />
 
@@ -32,7 +34,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="68dp"
-        android:text="66일째 - 습관이 자리잡는 시간."
+        android:text="66일 - 습관이 자리잡는 시간."
+        android:textColor="#AEAEAE"
         app:layout_constraintStart_toEndOf="@+id/activity_badge_66daysImage"
         app:layout_constraintTop_toBottomOf="@+id/activity_badge_21daysText" />
 
@@ -42,7 +45,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="68dp"
-        android:text="100일 동안 칭찬을 했어요!"
+        android:text="100일 - 습관을 확인하는 시간."
+        android:textColor="#AEAEAE"
         app:layout_constraintStart_toEndOf="@+id/activity_badge_100daysImage"
         app:layout_constraintTop_toBottomOf="@+id/activity_badge_66daysText" />
 
@@ -55,7 +59,7 @@
         android:scrollbarThumbHorizontal="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_calendar_dehaze" />
+        app:srcCompat="@drawable/ic_calendar_dehaze_black" />
 
     <ImageView
         android:id="@+id/activity_badge_mascotImage"
@@ -72,8 +76,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="칭찬 마스터가 되어보아요!"
-        android:textColor="#FFFFFF"
+        android:text="노려라, 칭찬 마스터!"
+        android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -86,8 +90,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="80dp"
-        android:text="삼일 넘게 칭찬을 했어요."
-        android:textColor="#FFFFFF"
+        android:text="3일 - 시작을 준비하는 시간."
+        android:textColor="#AEAEAE"
         app:layout_constraintStart_toEndOf="@+id/activity_badge_3daysImage"
         app:layout_constraintTop_toBottomOf="@+id/activity_badge_mainText" />
 
@@ -109,7 +113,7 @@
         android:layout_marginTop="3dp"
         android:text="작심삼일"
         android:textAlignment="center"
-        android:textColor="#FFFFFF"
+        android:textColor="#000000"
         android:textSize="10sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/activity_badge_3daysImage" />
@@ -131,7 +135,7 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="3dp"
         android:text="칭찬 스타터"
-        android:textColor="#FFFFFF"
+        android:textColor="#000000"
         android:textSize="10sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/activity_badge_1weekImage" />
@@ -153,7 +157,7 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="3dp"
         android:text="칭찬 마스터"
-        android:textColor="#FFFFFF"
+        android:textColor="#000000"
         android:textSize="10sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/activity_badge_100daysImage" />
@@ -175,7 +179,7 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="3dp"
         android:text="칭찬 시니어"
-        android:textColor="#FFFFFF"
+        android:textColor="#000000"
         android:textSize="10sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/activity_badge_66daysImage" />
@@ -197,9 +201,20 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="3dp"
         android:text="칭찬 주니어"
-        android:textColor="#FFFFFF"
+        android:textColor="#000000"
         android:textSize="10sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/activity_badge_21daysImage" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="칭찬 마스터가 되면 하늘이 맑게 갤 거예요."
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activity_badge_mainText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

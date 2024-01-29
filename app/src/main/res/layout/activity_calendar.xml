@@ -40,38 +40,13 @@
 
     <CalendarView
         android:id="@+id/activity_calendar_calendarView"
-        android:layout_width="380dp"
-        android:layout_height="450dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="383dp"
+        android:layout_height="517dp"
+        android:layout_marginBottom="15dp"
         android:focusedMonthDateColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_calendar_searchView" />
-
-    <SearchView
-        android:id="@+id/activity_calendar_searchView"
-        android:layout_width="100dp"
-        android:layout_height="28dp"
-        android:layout_marginTop="55dp"
-        android:layout_marginEnd="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/activity_calendar_searchguideText"
-        app:layout_constraintTop_toBottomOf="@+id/activity_calendar_mainText" />
-
-    <TextView
-        android:id="@+id/activity_calendar_searchguideText"
-        android:layout_width="100dp"
-        android:layout_height="28dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="55dp"
-        android:layout_marginEnd="8dp"
-        android:text="날씨, 년/월/일"
-        android:textAlignment="textEnd"
-        app:layout_constraintEnd_toStartOf="@+id/activity_calendar_searchView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_calendar_mainText" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
