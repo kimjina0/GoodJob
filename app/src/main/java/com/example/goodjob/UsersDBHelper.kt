@@ -1,5 +1,6 @@
 package com.example.goodjob
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
@@ -50,21 +51,10 @@ class UsersDBHelper(context: Context?) :
             null, // HAVING BY 조건
             null // ORDER BY 조건
         )
+        val cursorCount = cursor.count
+        cursor.close()
+        signUpDB.close()
         // 반환된 cursor 값이 존재 하면 아이디 중복(true), 존재 하지 않으면 아이디 생성 가능(false)
-        return cursor.count > 0
-    }
-
-    fun login(userID: String, userPassword: String): String {
-        val loginDB = this.readableDatabase
-        val cursor = loginDB.query(
-            "Users",
-            arrayOf("user_name"),
-            "user_ID = ? AND user_password = ?",
-            arrayOf(userID, userPassword),
-            null,
-            null,
-            null
-        )
-        return cursor.getString(0)
+        return cursorCount > 0
     }
 }
