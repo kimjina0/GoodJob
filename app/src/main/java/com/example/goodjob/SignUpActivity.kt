@@ -1,6 +1,7 @@
 package com.example.goodjob
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -17,6 +18,7 @@ class SignUpActivity : AppCompatActivity() {
     private lateinit var signUpBtn: Button
     private lateinit var loginBtn: Button
     private lateinit var signUpDBHelper: UsersDBHelper
+    private lateinit var spf: SharedPreferences
     private var toast: Toast? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +31,7 @@ class SignUpActivity : AppCompatActivity() {
         userPassword = binding.activitySignupEtUserPassword
         signUpBtn = binding.activitySignupBtnSignUp
         loginBtn = binding.activitySignupBtnLogin
+        spf = getSharedPreferences("user_info", MODE_PRIVATE)
 
         // 회원 가입 버튼 리스너 : Users.db에 새로운 유저 레코드 생성
         signUpDBHelper = UsersDBHelper(this)
@@ -56,8 +59,10 @@ class SignUpActivity : AppCompatActivity() {
                 userName.text.clear()
                 userID.text.clear()
                 userPassword.text.clear()
-                val intent = Intent(this, EmotionStatistics::class.java)
-                intent.putExtra("userName", name)
+                val intent = Intent(this, CalendarActivity::class.java)
+                val editor = spf.edit()
+                editor.putString("userName", name).apply()
+                editor.putString("userID", id).apply()
                 makeToast("회원가입 성공")
                 startActivity(intent)
             } else

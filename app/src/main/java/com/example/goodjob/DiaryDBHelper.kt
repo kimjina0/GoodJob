@@ -37,7 +37,13 @@ class DiaryDBHelper(context: Context) :
 
 
     //일기 저장
-    fun saveDiary(date: String, weather: String, title: String, content1: String, content2: String): Boolean {
+    fun saveDiary(
+        date: String,
+        weather: String,
+        title: String,
+        content1: String,
+        content2: String
+    ): Boolean {
         val values = ContentValues()
         values.put(COLUMN_DATE, date)
         values.put(COLUMN_WEATHER, weather)
