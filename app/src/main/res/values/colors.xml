@@ -9,4 +9,6 @@
     <color name="activity_emotion_statistics_tvBackground">#E7E7FF</color>
     <color name="activity_emotion_statistics_tvTextColor">#6A52FF</color>
     <color name="activity_emotion_statistics_tvStroke">#D9D9D9</color>
+    <!-- activity badge color -->
+    <color name="activity_badge_tvTextColor">#AEAEAE</color>
 </resources>

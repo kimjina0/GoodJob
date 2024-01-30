@@ -15,6 +15,19 @@
     <string name="activity_emotion_statistics_tvSecond">2위</string>
     <string name="activity_emotion_statistics_tvThird">3위</string>
     <string name="activity_emotion_statistics_rvTextView">N개</string>
+    <!-- activity badge -->
+    <string name="activity_badge_info">노려라! \n 칭찬 마스터!</string>
+    <string name="activity_badge_info2">칭찬 마스터가 되면 하늘이 맑게 갤 거예요.</string>
+    <string name="activity_badge_3days">3일 - 시작을 준비하는 시간.</string>
+    <string name="activity_badge_7days">7일 - 일주일 간의 시작.</string>
+    <string name="activity_badge_21days">21일 - 시작을 준비하는 시간.</string>
+    <string name="activity_badge_66days">66일 - 시작을 준비하는 시간.</string>
+    <string name="activity_badge_100days">100일 - 습관을 확인하는 시간.</string>
+    <string name="activity_badge_3daysTitle">작심삼일</string>
+    <string name="activity_badge_7daysTitle">칭찬 스타터</string>
+    <string name="activity_badge_21daysTitle">칭찬 주니어</string>
+    <string name="activity_badge_66daysTitle">칭찬 시니어</string>
+    <string name="activity_badge_100daysTitle">칭찬 마스터</string>
     <!-- navi menu item -->
     <string name="navi_menu_item_calendar">캘린더</string>
     <string name="navi_menu_item_emotion_statistics">월별 감정 통계</string>

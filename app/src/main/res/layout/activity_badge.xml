@@ -1,220 +1,269 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_badge_DL"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    tools:context=".BadgeActivity">
 
-    <TextView
-        android:id="@+id/activity_badge_1weekText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="68dp"
-        android:text="7일 - 일주일간의 시작."
-        android:textColor="#AEAEAE"
-        app:layout_constraintStart_toEndOf="@+id/activity_badge_1weekImage"
-        app:layout_constraintTop_toBottomOf="@+id/activity_badge_3daysText" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
 
-    <TextView
-        android:id="@+id/activity_badge_21daysText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="68dp"
-        android:text="21일 - 행동이 습관화되는 시간."
-        android:textColor="#AEAEAE"
-        app:layout_constraintStart_toEndOf="@+id/activity_badge_21daysImage"
-        app:layout_constraintTop_toBottomOf="@+id/activity_badge_1weekText" />
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/activity_badge_tb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/activity_badge_66daysText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="68dp"
-        android:text="66일 - 습관이 자리잡는 시간."
-        android:textColor="#AEAEAE"
-        app:layout_constraintStart_toEndOf="@+id/activity_badge_66daysImage"
-        app:layout_constraintTop_toBottomOf="@+id/activity_badge_21daysText" />
+        <LinearLayout
+            android:id="@+id/activity_badge_llInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/activity_badge_tb">
 
-    <TextView
-        android:id="@+id/activity_badge_100daysText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="68dp"
-        android:text="100일 - 습관을 확인하는 시간."
-        android:textColor="#AEAEAE"
-        app:layout_constraintStart_toEndOf="@+id/activity_badge_100daysImage"
-        app:layout_constraintTop_toBottomOf="@+id/activity_badge_66daysText" />
+            <ImageView
+                android:id="@+id/activity_badge_mascotImage"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_main_character" />
 
-    <ImageView
-        android:id="@+id/activity_badge_drawerImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:scrollbarThumbHorizontal="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_calendar_dehaze_black" />
+            <TextView
+                android:id="@+id/activity_badge_mainText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="@string/activity_badge_info"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
 
-    <ImageView
-        android:id="@+id/activity_badge_mascotImage"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_activity_emotion_statistics_textview"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:text="@string/activity_badge_info2"
+                android:textStyle="bold" />
+        </LinearLayout>
 
-    <TextView
-        android:id="@+id/activity_badge_mainText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="노려라, 칭찬 마스터!"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_badge_mascotImage" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/activity_badge_llInfo">
 
-    <TextView
-        android:id="@+id/activity_badge_3daysText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="80dp"
-        android:text="3일 - 시작을 준비하는 시간."
-        android:textColor="#AEAEAE"
-        app:layout_constraintStart_toEndOf="@+id/activity_badge_3daysImage"
-        app:layout_constraintTop_toBottomOf="@+id/activity_badge_mainText" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/activity_badge_3daysImage"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="60dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_badge_mainText"
-        tools:srcCompat="@tools:sample/avatars" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/activity_badge_3daysTitle"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="3dp"
-        android:text="작심삼일"
-        android:textAlignment="center"
-        android:textColor="#000000"
-        android:textSize="10sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_badge_3daysImage" />
+                    <ImageView
+                        android:id="@+id/activity_badge_3daysImage"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/badge_3days" />
 
-    <ImageView
-        android:id="@+id/activity_badge_1weekImage"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_badge_3daysTitle"
-        tools:srcCompat="@tools:sample/avatars" />
+                    <TextView
+                        android:id="@+id/activity_badge_3daysTitle"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/activity_badge_3daysTitle"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="10sp" />
 
-    <TextView
-        android:id="@+id/activity_badge_1weekTitle"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="3dp"
-        android:text="칭찬 스타터"
-        android:textColor="#000000"
-        android:textSize="10sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_badge_1weekImage" />
+                </LinearLayout>
 
-    <ImageView
-        android:id="@+id/activity_badge_100daysImage"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_badge_66daysTitle"
-        tools:srcCompat="@tools:sample/avatars" />
+                <TextView
+                    android:id="@+id/activity_badge_3daysText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/activity_badge_3days"
+                    android:textColor="@color/activity_badge_tvTextColor" />
+            </LinearLayout>
 
-    <TextView
-        android:id="@+id/activity_badge_100daysTitle"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="3dp"
-        android:text="칭찬 마스터"
-        android:textColor="#000000"
-        android:textSize="10sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_badge_100daysImage" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
 
-    <ImageView
-        android:id="@+id/activity_badge_66daysImage"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_badge_21daysTitle"
-        tools:srcCompat="@tools:sample/avatars" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/activity_badge_66daysTitle"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="3dp"
-        android:text="칭찬 시니어"
-        android:textColor="#000000"
-        android:textSize="10sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_badge_66daysImage" />
+                    <ImageView
+                        android:id="@+id/activity_badge_1weekImage"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/badge_starter" />
 
-    <ImageView
-        android:id="@+id/activity_badge_21daysImage"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_badge_1weekTitle"
-        tools:srcCompat="@tools:sample/avatars" />
+                    <TextView
+                        android:id="@+id/activity_badge_1weekTitle"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/activity_badge_7daysTitle"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="10sp" />
 
-    <TextView
-        android:id="@+id/activity_badge_21daysTitle"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="3dp"
-        android:text="칭찬 주니어"
-        android:textColor="#000000"
-        android:textSize="10sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_badge_21daysImage" />
+                </LinearLayout>
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="칭찬 마스터가 되면 하늘이 맑게 갤 거예요."
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_badge_mainText" />
+                <TextView
+                    android:id="@+id/activity_badge_1weekText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/activity_badge_7days"
+                    android:textColor="@color/activity_badge_tvTextColor" />
+            </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/activity_badge_21daysImage"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/badge_junior" />
+
+                    <TextView
+                        android:id="@+id/activity_badge_21daysTitle"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/activity_badge_21daysTitle"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="10sp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/activity_badge_21daysText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/activity_badge_21days"
+                    android:textColor="@color/activity_badge_tvTextColor" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/activity_badge_66daysImage"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/badge_senior" />
+
+                    <TextView
+                        android:id="@+id/activity_badge_66daysTitle"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/activity_badge_66daysTitle"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="10sp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/activity_badge_66daysText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/activity_badge_66days"
+                    android:textColor="@color/activity_badge_tvTextColor" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/activity_badge_100daysImage"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/badge_master" />
+
+                    <TextView
+                        android:id="@+id/activity_badge_100daysTitle"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/activity_badge_100daysTitle"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="10sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/activity_badge_100daysText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/activity_badge_100days"
+                    android:textColor="@color/activity_badge_tvTextColor" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/activity_badge_NV"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/navi_header"
+        app:menu="@menu/navi_menu" />
+</androidx.drawerlayout.widget.DrawerLayout>

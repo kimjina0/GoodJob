@@ -4,56 +4,61 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingTop="20dp"
     android:paddingLeft="30dp"
-    android:paddingRight="30dp" >
+    android:paddingTop="20dp"
+    android:paddingRight="30dp">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center">
+        android:layout_gravity="center">
 
         <ImageView
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="120dp"
             android:id="@+id/activity_login_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:srcCompat="@tools:sample/avatars" />
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:src="@drawable/ic_main_character" />
     </LinearLayout>
 
     <LinearLayout
-        android:padding="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp">
+        android:layout_marginTop="40dp"
+        android:padding="16dp">
 
         <TextView
             android:layout_width="60sp"
             android:layout_height="wrap_content"
-            android:text="아이디"/>
+            android:text="아이디" />
+
         <EditText
             android:id="@+id/activity_login_edtID"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_activity_signup_edittext"
+            android:digits="@string/activity_signup_etInputType"
+            android:paddingStart="16dp" />
     </LinearLayout>
 
     <LinearLayout
-        android:padding="13dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:padding="13dp">
 
         <TextView
             android:layout_width="60sp"
             android:layout_height="wrap_content"
-            android:text="비밀번호"/>
+            android:text="비밀번호" />
+
         <EditText
             android:id="@+id/activity_login_edtPW"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_activity_signup_edittext"
+            android:digits="@string/activity_signup_etInputType"
+            android:inputType="textPassword"
+            android:paddingStart="16dp" />
     </LinearLayout>
-
-
 
 
     <LinearLayout
@@ -61,19 +66,20 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:paddingTop="50dp">
+
         <Button
+            android:id="@+id/activity_login_btnLogin"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:id="@+id/activity_login_btnLogin"
             android:text="로그인" />
     </LinearLayout>
-
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center" >
+        android:gravity="center">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -82,18 +88,19 @@
 
 
     </LinearLayout>
+
     <LinearLayout
-        android:gravity="center"
-        android:paddingTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingTop="10dp" />
+
     <Button
         android:id="@+id/activity_login_btnReg"
-        android:layout_marginLeft="75dp"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="회원가입"  />
-
+        android:layout_marginLeft="75dp"
+        android:text="회원가입" />
 
 
 </LinearLayout>

@@ -1,5 +1,7 @@
 package com.example.goodjob
 
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -16,6 +18,10 @@ class EmotionStatistics : AppCompatActivity(), NavigationView.OnNavigationItemSe
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navigationView: NavigationView
     private lateinit var toolbar: androidx.appcompat.widget.Toolbar
+    private lateinit var userName: String
+    private lateinit var userID: String
+    private lateinit var spf: SharedPreferences
+    private var toast: Toast? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityEmotionStatisticsBinding.inflate(layoutInflater)
@@ -24,6 +30,7 @@ class EmotionStatistics : AppCompatActivity(), NavigationView.OnNavigationItemSe
         drawerLayout = binding.activityEmotionStatisticsDL
         navigationView = binding.activityEmotionStatisticsNV
         toolbar = binding.activityEmotionStatisticsTb
+        spf = getSharedPreferences("user_info", MODE_PRIVATE)
         // 네비게이션 드로어 사용 설정
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -31,7 +38,7 @@ class EmotionStatistics : AppCompatActivity(), NavigationView.OnNavigationItemSe
         supportActionBar?.setHomeAsUpIndicator(R.drawable.baseline_menu_24)
 
         // 네비게이션 드로어 헤더에 받아온 사용자 이름 설정
-        val userName = intent.getStringExtra("userName")
+        userName = spf.getString("userName", "UNKNOWN")!!
         val header = navigationView.getHeaderView(0)
         header.findViewById<TextView>(R.id.navi_header_tvUserName).text = userName
         // 네비게이션 드로어 메뉴 선택 리스너 등록
@@ -41,8 +48,10 @@ class EmotionStatistics : AppCompatActivity(), NavigationView.OnNavigationItemSe
     // 네비게이션 드로어 메뉴 클릭 리스너
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.navi_menu_item_calendar ->
-                Toast.makeText(this, "Calendar", Toast.LENGTH_SHORT).show()
+            R.id.navi_menu_item_calendar -> {
+                val intent = Intent(this, CalendarActivity::class.java)
+                startActivity(intent)
+            }
 
             R.id.navi_menu_item_emotion_statistics -> Toast.makeText(
                 this,
@@ -50,11 +59,10 @@ class EmotionStatistics : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 Toast.LENGTH_SHORT
             ).show()
 
-            R.id.navi_menu_item_badge -> Toast.makeText(
-                this,
-                "Badge",
-                Toast.LENGTH_SHORT
-            ).show()
+            R.id.navi_menu_item_badge -> {
+                val intent = Intent(this, BadgeActivity::class.java)
+                startActivity(intent)
+            }
         }
         drawerLayout.closeDrawers() // 기능을 수행하고 네비게이션을 닫아준다.
         return true
@@ -75,5 +83,11 @@ class EmotionStatistics : AppCompatActivity(), NavigationView.OnNavigationItemSe
     // 뒤로 가기 버튼 클릭 처리
     override fun onBackPressed() { // 네비게이션 드로어가 열려 있으면 닫음
         drawerLayout.closeDrawers()
+    }
+
+    // Activity 종료 시, Toast message 취소
+    override fun onStop() {
+        super.onStop()
+        toast?.cancel()
     }
 }

@@ -1,9 +1,7 @@
 package com.example.goodjob
 
-import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
-import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import java.text.SimpleDateFormat
@@ -56,5 +54,30 @@ class UsersDBHelper(context: Context?) :
         signUpDB.close()
         // 반환된 cursor 값이 존재 하면 아이디 중복(true), 존재 하지 않으면 아이디 생성 가능(false)
         return cursorCount > 0
+    }
+
+    // 로그인 메소드
+    fun login(userID: String, userPassword: String) : String {
+        val loginDB = this.readableDatabase
+        val cursor = loginDB.query(
+            "Users",
+            arrayOf("user_name"),
+            "user_ID = ? AND user_password = ?",
+            arrayOf(userID, userPassword),
+            null,
+            null,
+            null
+        )
+        return if (cursor.count == 0) {
+            cursor.close()
+            loginDB.close()
+            "UNKNOWN"
+        } else {
+            cursor.moveToFirst()
+            val userName = cursor.getString(0)
+            cursor.close()
+            loginDB.close()
+            userName
+        }
     }
 }
