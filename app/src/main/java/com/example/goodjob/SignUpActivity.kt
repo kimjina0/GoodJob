@@ -42,22 +42,26 @@ class SignUpActivity : AppCompatActivity() {
             val isPasswordBlank = password.isBlank()
 
             // 값이 입력 되어 있는지 검사
-            if (isNameBlank) makeToast("사용자 이름을 입력하세요.")
-            else if (isIDBlank) makeToast("아이디를 입력하세요.")
-            else if (isPasswordBlank) makeToast("비밀번호를 입력하세요.")
+            if (isNameBlank)
+                makeToast("사용자 이름을 입력하세요.")
+            else if (isIDBlank)
+                makeToast("아이디를 입력하세요.")
+            else if (isPasswordBlank)
+                makeToast("비밀번호를 입력하세요.")
             // ID 유효성 검사
-            else if (signUpDBHelper.checkUserID(id)) makeToast("이미 존재하는 ID입니다.")
+            else if (signUpDBHelper.checkUserID(id))
+                makeToast("이미 존재하는 ID입니다.")
             // 회원 가입
             else if (signUpDBHelper.insertData(name, id, password)) {
-                makeToast("회원가입 성공")
                 userName.text.clear()
                 userID.text.clear()
                 userPassword.text.clear()
                 val intent = Intent(this, EmotionStatistics::class.java)
                 intent.putExtra("userName", name)
-
+                makeToast("회원가입 성공")
                 startActivity(intent)
-            } else makeToast("오류 발생")
+            } else
+                makeToast("오류 발생")
         }
 
         // 로그인 버튼 리스너 : 로그인 버튼 클릭 시, Login Activity 로 되돌아 감

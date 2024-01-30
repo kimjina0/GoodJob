@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">GoodJob</string>
+    <string name="app_name">잘했다리</string>
     <!-- activity signup  -->
     <string name="activity_signup_info">가입을 해야 \n 우리 만의 다이어리를 만들 수 있어!</string>
     <string name="activity_signup_user_name">사용자 이름</string>
@@ -15,4 +15,8 @@
     <string name="activity_emotion_statistics_tvSecond">2위</string>
     <string name="activity_emotion_statistics_tvThird">3위</string>
     <string name="activity_emotion_statistics_rvTextView">N개</string>
+    <!-- navi menu item -->
+    <string name="navi_menu_item_calendar">캘린더</string>
+    <string name="navi_menu_item_emotion_statistics">월별 감정 통계</string>
+    <string name="navi_menu_item_badge">배지 달성</string>
 </resources>
