@@ -8,40 +8,67 @@
 
 
     <ImageView
+        android:id="@+id/mood_angry"
         android:layout_width="100dp"
         android:layout_height="80dp"
         android:padding="20dp"
-        android:src="@drawable/ic_launcher_background"
+        android:src="@drawable/emoji_angry"
         android:onClick="onExpressionClick"/>
     <ImageView
+        android:id="@+id/mood_basic"
         android:layout_width="100dp"
         android:layout_height="80dp"
         android:padding="20dp"
-        android:src="@drawable/ic_launcher_background"
+        android:src="@drawable/emoji_basic"
         android:onClick="onExpressionClick"/>
     <ImageView
+        android:id="@+id/mood_best"
         android:layout_width="100dp"
         android:layout_height="80dp"
         android:padding="20dp"
-        android:src="@drawable/ic_launcher_background"
+        android:src="@drawable/emoji_best"
         android:onClick="onExpressionClick"/>
     <ImageView
+        android:id="@+id/mood_dejected"
         android:layout_width="100dp"
         android:layout_height="80dp"
         android:padding="20dp"
-        android:src="@drawable/ic_launcher_background"
+        android:src="@drawable/emoji_dejected"
         android:onClick="onExpressionClick"/>
     <ImageView
+        android:id="@+id/mood_depression"
         android:layout_width="100dp"
         android:layout_height="80dp"
         android:padding="20dp"
-        android:src="@drawable/ic_launcher_foreground"
+        android:src="@drawable/emoji_depression"
         android:onClick="onExpressionClick"/>
     <ImageView
+        android:id="@+id/mood_happy"
         android:layout_width="100dp"
         android:layout_height="80dp"
         android:padding="20dp"
-        android:src="@drawable/ic_launcher_background"
+        android:src="@drawable/emoji_happy"
+        android:onClick="onExpressionClick"/>
+    <ImageView
+        android:id="@+id/mood_proud"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
+        android:padding="20dp"
+        android:src="@drawable/emoji_proud"
+        android:onClick="onExpressionClick"/>
+    <ImageView
+        android:id="@+id/mood_sad"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
+        android:padding="20dp"
+        android:src="@drawable/emoji_sad"
+        android:onClick="onExpressionClick"/>
+    <ImageView
+        android:id="@+id/mood_sick"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
+        android:padding="20dp"
+        android:src="@drawable/emoji_sick"
         android:onClick="onExpressionClick"/>
 
 
