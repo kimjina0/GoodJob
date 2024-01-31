@@ -1,4 +1,5 @@
 package com.example.goodjob
+
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -20,6 +21,7 @@ class DiaryActivity : AppCompatActivity() {
     private var alertDialog: AlertDialog? = null
 
     private lateinit var dbHelper: DiaryDBHelper
+    private var selectedMoodId: Int = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,24 +35,29 @@ class DiaryActivity : AppCompatActivity() {
         editText2 = findViewById(R.id.activity_diary_edtText2)
         saveButton = findViewById(R.id.activity_diary_btnSave)
 
-        //dbHelper 초기화
+        // dbHelper 초기화
         dbHelper = DiaryDBHelper(this)
 
         imageView.setOnClickListener {
             showExpressionDialog()
         }
 
-
         saveButton.setOnClickListener {
-            //입력된 내용 가져옴
+            // 입력된 내용 가져옴
             val date = editTextDate.text.toString()
             val weather = weatherEditText.text.toString()
             val title = editTitle.text.toString()
             val content1 = editText.text.toString()
             val content2 = editText2.text.toString()
+            val moodCount = selectedMoodId
+
+            // 데이터베이스에 저장 전 이미지 사용 횟수 증가
+            if (selectedMoodId != -1) {
+                incrementMoodCount(selectedMoodId.toLong())
+            }
 
             // 데이터베이스에 저장
-            val success = dbHelper.saveDiary(date, weather, title, content1, content2)
+            val success = dbHelper.saveDiary(date, weather, title, content1, content2, moodCount)
 
             // 데이터베이스에 저장 여부 메세지 표시
             if (success) {
@@ -81,5 +88,13 @@ class DiaryActivity : AppCompatActivity() {
 
         // 대화 상자를 닫습니다.
         alertDialog?.dismiss()
+
+        // 마지막으로 선택된 이미지의 리소스 ID 저장
+        this.selectedMoodId = expressionImageView.id
+    }
+
+    // 이미지 사용 횟수 증가
+    private fun incrementMoodCount(diaryId: Long) {
+        dbHelper.incrementMoodCount(diaryId)
     }
 }
