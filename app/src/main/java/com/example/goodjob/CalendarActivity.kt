@@ -21,13 +21,15 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.goodjob.databinding.ActivityCalendarBinding
 import com.google.android.material.navigation.NavigationView
+import com.prolificinteractive.materialcalendarview.CalendarDay
+import com.prolificinteractive.materialcalendarview.MaterialCalendarView
 
 class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var dbHelper: UsersDBHelper
     private lateinit var sqLiteDatabase: SQLiteDatabase
     private lateinit var binding: ActivityCalendarBinding
-    private lateinit var calendarView: CalendarView
+    private lateinit var calendarView: MaterialCalendarView
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navigationView: NavigationView
     private lateinit var toolbar: androidx.appcompat.widget.Toolbar
@@ -45,6 +47,7 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         navigationView = binding.activityCalendarNV
         toolbar = binding.activityCalendarTb
         calendarView = binding.activityCalendarCalendarView
+        calendarView.setSelectedDate(CalendarDay.today())
         spf = getSharedPreferences("user_info", MODE_PRIVATE)
 
         // 네비게이션 드로어 사용 설정
@@ -63,7 +66,6 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
 
         //받아온 ID를 변수로 저장
         userID = spf.getString("userID", "UNKNOWN")!!
-
 
 //        sqLiteDatabase = dbHelper.readableDatabase
 
