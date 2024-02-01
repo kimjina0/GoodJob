@@ -15,19 +15,18 @@ class DiaryDBHelper(context: Context) :
         private const val DATABASE_NAME = "DiaryDatabase.db"
         private const val TABLE_NAME = "diary"
         private const val COLUMN_ID = "id"
+        private const val COLUMN_USER_ID = "user_id"
         private const val COLUMN_DATE = "date"
         private const val COLUMN_WEATHER = "weather"
         private const val COLUMN_TITLE = "title"
         private const val COLUMN_CONTENT1 = "content1"
         private const val COLUMN_CONTENT2 = "content2"
-        private const val COLUMN_MOOD_COUNT = "moodCount"
     }
-
 
     //데이터 베이스 생성
     override fun onCreate(db: SQLiteDatabase) {
         val CREATE_TABLE =
-            ("CREATE TABLE $TABLE_NAME ($COLUMN_ID INTEGER PRIMARY KEY AUTOINCREMENT, $COLUMN_DATE TEXT, $COLUMN_WEATHER TEXT, $COLUMN_TITLE TEXT, $COLUMN_CONTENT1 TEXT, $COLUMN_CONTENT2 TEXT, $COLUMN_MOOD_COUNT INTEGER DEFAULT 0)")
+            ("CREATE TABLE $TABLE_NAME ($COLUMN_ID INTEGER PRIMARY KEY AUTOINCREMENT, $COLUMN_USER_ID TEXT, $COLUMN_DATE TEXT, $COLUMN_WEATHER TEXT, $COLUMN_TITLE TEXT, $COLUMN_CONTENT1 TEXT, $COLUMN_CONTENT2 TEXT);")
         db.execSQL(CREATE_TABLE)
     }
 
@@ -37,48 +36,22 @@ class DiaryDBHelper(context: Context) :
         onCreate(db)
     }
 
-
-    // 기분 이미지 사용 횟수 증가
-    fun incrementMoodCount(diaryId: Long) {
-        val db = this.writableDatabase
-        db.execSQL("UPDATE $TABLE_NAME SET $COLUMN_MOOD_COUNT = $COLUMN_MOOD_COUNT + 1 WHERE $COLUMN_ID = $diaryId")
-        db.close()
-    }
-
-    // 이미지 사용 횟수 가져오기
-    @SuppressLint("Range")
-    fun getMoodCount(moodId: Int): Int {
-        val db = this.readableDatabase
-        val cursor = db.rawQuery("SELECT $COLUMN_MOOD_COUNT FROM $TABLE_NAME WHERE $COLUMN_ID = $moodId", null)
-
-        var moodCount = 0
-        if (cursor.moveToFirst()) {
-            moodCount = cursor.getInt(cursor.getColumnIndex(COLUMN_MOOD_COUNT))
-        }
-
-        cursor.close()
-        db.close()
-
-        return moodCount
-    }
-
-
     //일기 저장
     fun saveDiary(
-        date: String,
+        userID: String?,
+        date: String?,
         weather: String,
         title: String,
         content1: String,
-        content2: String,
-        moodCount: Int
+        content2: String
     ): Boolean {
         val values = ContentValues()
+        values.put(COLUMN_USER_ID, userID)
         values.put(COLUMN_DATE, date)
         values.put(COLUMN_WEATHER, weather)
         values.put(COLUMN_TITLE, title)
         values.put(COLUMN_CONTENT1, content1)
         values.put(COLUMN_CONTENT2, content2)
-        values.put(COLUMN_MOOD_COUNT, moodCount)
 
         //쓸 수 있는 데이터베이스 가져옴
         val db = this.writableDatabase
@@ -86,12 +59,25 @@ class DiaryDBHelper(context: Context) :
         val id = db.insert(TABLE_NAME, null, values)
         db.close()
 
-
         //id가 -1이 아니라면 true 반환 -> insert메서드 성공여부
         return id != -1L
-
-
     }
 
-
+    // 사용자 별 총 일기 개수 반환
+    fun getDiaryCount(userID: String): Int {
+        val db = this.readableDatabase
+        val cursor = db.query(
+            TABLE_NAME,
+            arrayOf(COLUMN_USER_ID),
+            "$COLUMN_USER_ID = ?",
+            arrayOf(userID),
+            null,
+            null,
+            null
+        )
+        val cursorCount = cursor.count
+        db.close()
+        cursor.close()
+        return cursorCount
+    }
 }

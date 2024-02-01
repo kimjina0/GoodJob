@@ -1,21 +1,13 @@
 package com.example.goodjob
 
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
-import android.database.sqlite.SQLiteOpenHelper
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.CalendarView
-import android.widget.CalendarView.OnDateChangeListener
-import android.widget.ImageView
-import android.widget.SearchView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -23,20 +15,27 @@ import com.example.goodjob.databinding.ActivityCalendarBinding
 import com.google.android.material.navigation.NavigationView
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-
-    private lateinit var dbHelper: UsersDBHelper
+    private lateinit var usersDBHelper: UsersDBHelper
     private lateinit var sqLiteDatabase: SQLiteDatabase
+    private lateinit var diaryDBHelper: DiaryDBHelper
+
     private lateinit var binding: ActivityCalendarBinding
+
     private lateinit var calendarView: MaterialCalendarView
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navigationView: NavigationView
+
     private lateinit var toolbar: androidx.appcompat.widget.Toolbar
+
     private lateinit var userName: String
     private lateinit var userID: String
     private lateinit var spf: SharedPreferences
     private var toast: Toast? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +46,7 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         navigationView = binding.activityCalendarNV
         toolbar = binding.activityCalendarTb
         calendarView = binding.activityCalendarCalendarView
-        calendarView.setSelectedDate(CalendarDay.today())
+        calendarView.selectedDate = CalendarDay.today()
         spf = getSharedPreferences("user_info", MODE_PRIVATE)
 
         // 네비게이션 드로어 사용 설정
@@ -67,29 +66,22 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         //받아온 ID를 변수로 저장
         userID = spf.getString("userID", "UNKNOWN")!!
 
-//        sqLiteDatabase = dbHelper.readableDatabase
-
-//        var cursor: Cursor
-//        cursor = sqLiteDatabase.rawQuery("SELECT ... (일기 데이터 부분)")
-
-//        다이어리 작성 유무에 따라 캘린더에 시각화.(기분 아이콘)
-//            다이어리 DB, 날짜 확인
-//            if (그 날짜에 작성된 일기가 있다면)...
-
-//        날짜 선택 시, 각종 정보 전달 + 다이어리 화면으로 전환. (이를 받은 다이어리 액티비티가 각 DB에 접근.)
-//        calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
-//
-//            //var intent = Intent(this, DiaryActivity::class.java)
-//
-//            //전달될 정보
-//            //intent.putExtra("userID", userID)
-//            intent.putExtra("year", year)
-//            intent.putExtra("month", month)
-//            intent.putExtra("dayOfMonth", dayOfMonth)
-//
-//            //화면 전환
-//            startActivity(intent)
-//        }
+        // 캘린더 날짜 선택 시, DiaryActivity 전환
+        val intent = Intent(this, DiaryActivity::class.java)
+        val dateFormat = SimpleDateFormat("yyyy년 M월 d일", Locale.getDefault())
+        val dateForDiaryDBFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val yearForEmojiDBFormat = SimpleDateFormat("yyyy", Locale.getDefault())
+        val monthForEmojiDBFormat = SimpleDateFormat("M", Locale.getDefault())
+        // 날짜 선택 이벤트 메소드
+        calendarView.setOnDateChangedListener { _, date, selected ->
+            if (selected) {
+                intent.putExtra("date", dateFormat.format(date.date))
+                intent.putExtra("dateForDiaryDB", dateForDiaryDBFormat.format(date.date))
+                intent.putExtra("yearForEmojiDB", yearForEmojiDBFormat.format(date.date))
+                intent.putExtra("monthForEmojiDB", monthForEmojiDBFormat.format(date.date))
+                startActivity(intent)
+            }
+        }
     }
 
     // 네비게이션 드로어 관련 메소드

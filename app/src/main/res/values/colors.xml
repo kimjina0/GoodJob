@@ -2,13 +2,27 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <!-- activity login color -->
+    <color name="activity_signup_btnSignupColor">#D6AB5A</color>
     <!-- activity signup color -->
     <color name="activity_signup_etStroke">#80000000</color>
     <color name="activity_signup_etBackground">#F6FAFF</color>
+    <color name="activity_signup_btnLoginColor">#D6AB5A</color>
+    <color name="activity_signup_btnSignup">#282B46</color>
     <!-- activity emotion statistics color -->
     <color name="activity_emotion_statistics_tvBackground">#E7E7FF</color>
     <color name="activity_emotion_statistics_tvTextColor">#6A52FF</color>
     <color name="activity_emotion_statistics_tvStroke">#D9D9D9</color>
     <!-- activity badge color -->
     <color name="activity_badge_tvTextColor">#AEAEAE</color>
+    <!-- activity diary color -->
+    <color name="activity_diary_tvStroke">#5862BD</color>
+    <color name="activity_diary_tvStroke2">#D9D9D9</color>
+    <color name="activity_diary_tvBackground">#E7E7FF</color>
+    <color name="activity_diary_tvTextColor">#3D316F</color>
+    <color name="activity_diary_tvDateColor">#C5C2C2</color>
+    <!-- activity calendar color -->
+    <color name="activity_calendar_background">#B7CBFF</color>
+    <!-- line color -->
+    <color name="line_color">#3D316F</color>
 </resources>

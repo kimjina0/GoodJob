@@ -3,6 +3,7 @@ package com.example.goodjob
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
@@ -10,8 +11,14 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.goodjob.databinding.ActivityEmotionStatisticsBinding
 import com.google.android.material.navigation.NavigationView
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 
 class EmotionStatistics : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var binding: ActivityEmotionStatisticsBinding
@@ -20,7 +27,12 @@ class EmotionStatistics : AppCompatActivity(), NavigationView.OnNavigationItemSe
     private lateinit var toolbar: androidx.appcompat.widget.Toolbar
     private lateinit var userName: String
     private lateinit var userID: String
+    private lateinit var monthTV: TextView
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var diaryDBHelper: DiaryDBHelper
+    private lateinit var emojiDBHelper: EmojiDBHelper
     private lateinit var spf: SharedPreferences
+    private var monthText: String = "NULL"
     private var toast: Toast? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +42,10 @@ class EmotionStatistics : AppCompatActivity(), NavigationView.OnNavigationItemSe
         drawerLayout = binding.activityEmotionStatisticsDL
         navigationView = binding.activityEmotionStatisticsNV
         toolbar = binding.activityEmotionStatisticsTb
+        monthTV = binding.activityEmotionStatisticsTvMonth
+        recyclerView = binding.activityEmotionStatisticsRV
         spf = getSharedPreferences("user_info", MODE_PRIVATE)
+
         // 네비게이션 드로어 사용 설정
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -43,6 +58,40 @@ class EmotionStatistics : AppCompatActivity(), NavigationView.OnNavigationItemSe
         header.findViewById<TextView>(R.id.navi_header_tvUserName).text = userName
         // 네비게이션 드로어 메뉴 선택 리스너 등록
         navigationView.setNavigationItemSelectedListener(this)
+
+        // 현재 Month 로 설정
+        val monthFormat = SimpleDateFormat("M월", Locale.getDefault())
+        val dateFormat = SimpleDateFormat("yyyyMM", Locale.getDefault())
+        val yearForEmojiDBFormat = SimpleDateFormat("yyyy", Locale.getDefault())
+        val monthForEmojiDBFormat = SimpleDateFormat("M", Locale.getDefault())
+        val calendar = Calendar.getInstance()
+        calendar.time = Date()
+        monthText = monthFormat.format(calendar.time)
+        monthTV.text = monthText
+
+        // 이모지 가져 오기
+        val year = yearForEmojiDBFormat.format(calendar.time)
+        val month = monthForEmojiDBFormat.format(calendar.time)
+        userID = spf.getString("userID", "UNKNOWN")!!
+        diaryDBHelper = DiaryDBHelper(this)
+        emojiDBHelper = EmojiDBHelper(this)
+        if (diaryDBHelper.getDiaryCount(userID) == 0)
+            Toast.makeText(this, "작성된 일기가 없습니다.", Toast.LENGTH_SHORT).show()
+        else {
+            val ranking = emojiDBHelper.getEmojiCount(userID, year, month)
+            val first = getDrawableID(ranking[0].emojiName)
+            Log.i("ranking[0]", "${ranking[0].emojiName} + ${ranking[0].emojiCount}")
+            Log.i("ranking[8]", "${ranking[8].emojiName} + ${ranking[8].emojiCount}")
+            val second = getDrawableID(ranking[1].emojiName)
+            val third = getDrawableID(ranking[2].emojiName)
+            val rvAdapter = RecyclerViewAdapter(ranking)
+            val rvLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+            recyclerView.layoutManager = rvLayoutManager
+            recyclerView.adapter = rvAdapter
+            binding.activityEmotionStatisticsIvFirst.setImageResource(first)
+            binding.activityEmotionStatisticsIvSecond.setImageResource(second)
+            binding.activityEmotionStatisticsIvThird.setImageResource(third)
+        }
     }
 
     // 네비게이션 드로어 메뉴 클릭 리스너
@@ -90,4 +139,20 @@ class EmotionStatistics : AppCompatActivity(), NavigationView.OnNavigationItemSe
         super.onStop()
         toast?.cancel()
     }
+}
+
+private fun getDrawableID(moodName: String): Int {
+    var id: Int = -1
+    when (moodName) {
+        "mood_angry" -> id = R.drawable.emoji_angry
+        "mood_basic" -> id = R.drawable.emoji_basic
+        "mood_best" -> id = R.drawable.emoji_best
+        "mood_dejected" -> id = R.drawable.emoji_dejected
+        "mood_depression" -> id = R.drawable.emoji_depression
+        "mood_happy" -> id = R.drawable.emoji_happy
+        "mood_proud" -> id = R.drawable.emoji_proud
+        "mood_sad" -> id = R.drawable.emoji_sad
+        "mood_sick" -> id = R.drawable.emoji_sick
+    }
+    return id
 }

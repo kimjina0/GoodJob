@@ -24,9 +24,10 @@
 
         <LinearLayout
             android:id="@+id/linearLayout"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:background="@color/activity_calendar_background"
+            android:gravity="center"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -36,6 +37,7 @@
                 android:id="@+id/activity_calendar_mascotImage"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
+                android:layout_marginTop="10dp"
                 android:src="@drawable/ic_main_character"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -46,41 +48,30 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="오늘도 할 수 있어."
+                android:layout_marginBottom="5dp"
+                android:text="@string/activity_calendar_tv"
                 android:textAlignment="center"
+                android:textColor="@color/white"
                 android:textSize="13sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/activity_calendar_mascotImage" />
         </LinearLayout>
 
-<!--        <CalendarView
-            android:id="@+id/activity_calendar_calendarView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-            android:focusedMonthDateColor="#FFFFFF"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />-->
-
         <com.prolificinteractive.materialcalendarview.MaterialCalendarView
             android:id="@+id/activity_calendar_calendarView"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
+            android:layout_height="400dp"
             android:layout_marginBottom="15dp"
+            android:layout_weight="1"
             android:focusedMonthDateColor="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-
-            android:layout_weight="1"
             app:mcv_selectionColor="?attr/colorPrimary"
-            app:mcv_showOtherDates="all"
-            />
+            app:mcv_showOtherDates="all" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

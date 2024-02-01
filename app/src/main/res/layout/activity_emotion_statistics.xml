@@ -23,24 +23,33 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <!-- 월 표시 -->
-        <TextView
-            android:id="@+id/activity_emotion_statistics_tvMonth"
-            android:layout_width="152dp"
-            android:layout_height="67dp"
+        <LinearLayout
+            android:id="@+id/activity_emotion_statistics_ll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@drawable/bg_activity_emotion_statistics_textview"
-            android:gravity="center"
-            android:padding="16dp"
-            android:text="@string/activity_emotion_statistics_tvMonth"
-            android:textColor="@color/activity_emotion_statistics_tvTextColor"
-            android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/activity_emotion_statistics_tb" />
+            app:layout_constraintTop_toBottomOf="@+id/activity_emotion_statistics_tb">
+
+            <TextView
+                android:id="@+id/activity_emotion_statistics_tvMonth"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:background="@drawable/bg_activity_emotion_statistics_textview"
+                android:gravity="center"
+                android:text="@string/activity_emotion_statistics_tvMonth"
+                android:textColor="@color/activity_emotion_statistics_tvTextColor"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/activity_emotion_statistics_tb" />
+
+        </LinearLayout>
 
         <!-- Top 3 표시 -->
         <GridLayout
-            android:id="@+id/gridLayout"
+            android:id="@+id/activity_emotion_statistics_gridLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -48,7 +57,7 @@
             android:rowCount="5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/activity_emotion_statistics_tvMonth">
+            app:layout_constraintTop_toBottomOf="@+id/activity_emotion_statistics_ll">
 
             <!-- 1위 -->
             <ImageView
@@ -60,12 +69,13 @@
 
             <ImageView
                 android:id="@+id/activity_emotion_statistics_ivFirst"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_row="1"
                 android:layout_column="1"
                 android:layout_gravity="center"
-                app:srcCompat="@drawable/bg_activity_emotion_statistics_imageview" />
+                android:background="@drawable/bg_activity_emotion_statistics_imageview"
+                android:scaleType="fitCenter" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -78,12 +88,13 @@
             <!-- 2위 -->
             <ImageView
                 android:id="@+id/activity_emotion_statistics_ivSecond"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_row="3"
                 android:layout_column="0"
                 android:layout_gravity="center"
-                app:srcCompat="@drawable/bg_activity_emotion_statistics_imageview" />
+                android:background="@drawable/bg_activity_emotion_statistics_imageview"
+                android:scaleType="fitCenter" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -96,12 +107,13 @@
             <!-- 3위 -->
             <ImageView
                 android:id="@+id/activity_emotion_statistics_ivThird"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_row="3"
                 android:layout_column="2"
                 android:layout_gravity="center"
-                app:srcCompat="@drawable/bg_activity_emotion_statistics_imageview" />
+                android:background="@drawable/bg_activity_emotion_statistics_imageview"
+                android:scaleType="fitCenter" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -112,13 +124,24 @@
                 android:text="@string/activity_emotion_statistics_tvThird" />
         </GridLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/activity_emotion_statistics_rv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            app:layout_constraintTop_toBottomOf="@+id/gridLayout" />
+        <View
+            android:id="@+id/activity_emotion_statistics_line"
+            android:layout_width="300dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/line_color"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/activity_emotion_statistics_gridLayout" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/activity_emotion_statistics_RV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/activity_emotion_statistics_line" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
