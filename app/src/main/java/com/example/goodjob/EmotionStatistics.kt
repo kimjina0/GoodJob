@@ -3,17 +3,18 @@ package com.example.goodjob
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.goodjob.databinding.ActivityEmotionStatisticsBinding
 import com.google.android.material.navigation.NavigationView
-import com.prolificinteractive.materialcalendarview.CalendarDay
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -27,13 +28,11 @@ class EmotionStatistics : AppCompatActivity(), NavigationView.OnNavigationItemSe
     private lateinit var userName: String
     private lateinit var userID: String
     private lateinit var monthTV: TextView
-    private lateinit var nextBtn: Button
-    private lateinit var previousBtn: Button
+    private lateinit var recyclerView: RecyclerView
     private lateinit var diaryDBHelper: DiaryDBHelper
-    private lateinit var EmojiDBHelper: EmojiDBHelper
+    private lateinit var emojiDBHelper: EmojiDBHelper
     private lateinit var spf: SharedPreferences
     private var monthText: String = "NULL"
-    private var date: String = "yyyyMM"
     private var toast: Toast? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,8 +43,7 @@ class EmotionStatistics : AppCompatActivity(), NavigationView.OnNavigationItemSe
         navigationView = binding.activityEmotionStatisticsNV
         toolbar = binding.activityEmotionStatisticsTb
         monthTV = binding.activityEmotionStatisticsTvMonth
-        nextBtn = binding.activityEmotionStatisticsBtnNext
-        previousBtn = binding.activityEmotionStatisticsBtnPrevious
+        recyclerView = binding.activityEmotionStatisticsRV
         spf = getSharedPreferences("user_info", MODE_PRIVATE)
 
         // 네비게이션 드로어 사용 설정
@@ -68,39 +66,28 @@ class EmotionStatistics : AppCompatActivity(), NavigationView.OnNavigationItemSe
         val monthForEmojiDBFormat = SimpleDateFormat("M", Locale.getDefault())
         val calendar = Calendar.getInstance()
         calendar.time = Date()
-        val year = yearForEmojiDBFormat.format(date)
-        val month = monthForEmojiDBFormat.format(date)
         monthText = monthFormat.format(calendar.time)
-        date = dateFormat.format(calendar.time)
-        monthTV.text = month
-
-        // 다음 버튼 클릭 시, 다음 달로 이동
-        nextBtn.setOnClickListener {
-            calendar.add(Calendar.MONTH, 1)
-            monthText = monthFormat.format(calendar.time)
-            date = dateFormat.format(calendar.time)
-            monthTV.text = month
-        }
-
-        // 이전 버튼 클릭 시, 이전 달로 이동
-        previousBtn.setOnClickListener {
-            calendar.add(Calendar.MONTH, -1)
-            monthText = monthFormat.format(calendar.time)
-            date = dateFormat.format(calendar.time)
-            monthTV.text = month
-        }
+        monthTV.text = monthText
 
         // 이모지 가져 오기
+        val year = yearForEmojiDBFormat.format(calendar.time)
+        val month = monthForEmojiDBFormat.format(calendar.time)
         userID = spf.getString("userID", "UNKNOWN")!!
         diaryDBHelper = DiaryDBHelper(this)
-        EmojiDBHelper = EmojiDBHelper(this)
+        emojiDBHelper = EmojiDBHelper(this)
         if (diaryDBHelper.getDiaryCount(userID) == 0)
             Toast.makeText(this, "작성된 일기가 없습니다.", Toast.LENGTH_SHORT).show()
         else {
-            val ranking = EmojiDBHelper.getEmojiCount(userID, year, month)
+            val ranking = emojiDBHelper.getEmojiCount(userID, year, month)
             val first = getDrawableID(ranking[0].emojiName)
+            Log.i("ranking[0]", "${ranking[0].emojiName} + ${ranking[0].emojiCount}")
+            Log.i("ranking[8]", "${ranking[8].emojiName} + ${ranking[8].emojiCount}")
             val second = getDrawableID(ranking[1].emojiName)
             val third = getDrawableID(ranking[2].emojiName)
+            val rvAdapter = RecyclerViewAdapter(ranking)
+            val rvLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+            recyclerView.layoutManager = rvLayoutManager
+            recyclerView.adapter = rvAdapter
             binding.activityEmotionStatisticsIvFirst.setImageResource(first)
             binding.activityEmotionStatisticsIvSecond.setImageResource(second)
             binding.activityEmotionStatisticsIvThird.setImageResource(third)

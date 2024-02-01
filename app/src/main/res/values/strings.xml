@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">잘했다리</string>
+    <!-- activity login -->
+    <string name="activity_login_info">우리는 각자의 다이어리에 \n들어가야해서 로그인이 필수야!</string>
+    <string name="activity_login_info2">만약 아직 가입하지 않았다면 \n회원가입을 부탁할게!</string>
+    <string name="activity_login_btnLogin">로그인</string>
+    <string name="activity_login_btnSignup">회원가입</string>
+
     <!-- activity signup  -->
     <string name="activity_signup_info">가입을 해야 \n 우리 만의 다이어리를 만들 수 있어!</string>
     <string name="activity_signup_user_name">사용자 이름</string>
@@ -41,4 +47,6 @@
     <string name="activity_diary_htContent">내용</string>
     <string name="activity_diary_tvInfo">오늘의 자신을 칭찬해주세요!</string>
     <string name="activity_diary_btnSave">저장</string>
+    <!-- activity calendar -->
+    <string name="activity_calendar_tv">오늘도 할 수 있어!</string>
 </resources>

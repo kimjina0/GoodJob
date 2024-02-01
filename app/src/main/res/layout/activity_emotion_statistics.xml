@@ -32,18 +32,10 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/activity_emotion_statistics_tb">
 
-            <Button
-                android:id="@+id/activity_emotion_statistics_btnPrevious"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
-                android:text="@string/activity_emotion_statistics_btnPrevious"
-                android:textStyle="bold" />
-
             <TextView
                 android:id="@+id/activity_emotion_statistics_tvMonth"
                 android:layout_width="150dp"
-                android:layout_height="60dp"
+                android:layout_height="50dp"
                 android:background="@drawable/bg_activity_emotion_statistics_textview"
                 android:gravity="center"
                 android:text="@string/activity_emotion_statistics_tvMonth"
@@ -53,18 +45,11 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/activity_emotion_statistics_tb" />
 
-            <Button
-                android:id="@+id/activity_emotion_statistics_btnNext"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:text="@string/activity_emotion_statistics_btnNext"
-                android:textStyle="bold" />
         </LinearLayout>
 
         <!-- Top 3 표시 -->
         <GridLayout
-            android:id="@+id/gridLayout"
+            android:id="@+id/activity_emotion_statistics_gridLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -89,7 +74,8 @@
                 android:layout_row="1"
                 android:layout_column="1"
                 android:layout_gravity="center"
-                app:srcCompat="@drawable/bg_activity_emotion_statistics_imageview" />
+                android:background="@drawable/bg_activity_emotion_statistics_imageview"
+                android:scaleType="fitCenter" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -107,7 +93,8 @@
                 android:layout_row="3"
                 android:layout_column="0"
                 android:layout_gravity="center"
-                app:srcCompat="@drawable/bg_activity_emotion_statistics_imageview" />
+                android:background="@drawable/bg_activity_emotion_statistics_imageview"
+                android:scaleType="fitCenter" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -120,12 +107,13 @@
             <!-- 3위 -->
             <ImageView
                 android:id="@+id/activity_emotion_statistics_ivThird"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_row="3"
                 android:layout_column="2"
                 android:layout_gravity="center"
-                app:srcCompat="@drawable/bg_activity_emotion_statistics_imageview" />
+                android:background="@drawable/bg_activity_emotion_statistics_imageview"
+                android:scaleType="fitCenter" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -136,217 +124,24 @@
                 android:text="@string/activity_emotion_statistics_tvThird" />
         </GridLayout>
 
-        <GridLayout
+        <View
+            android:id="@+id/activity_emotion_statistics_line"
+            android:layout_width="300dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/line_color"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/activity_emotion_statistics_gridLayout" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/activity_emotion_statistics_RV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:columnCount="3"
-            android:rowCount="6"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/gridLayout">
-
-            <ImageView
-                android:id="@+id/activity_emotion_statistics_4"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_row="0"
-                android:layout_column="0"
-                android:layout_gravity="center"
-                android:src="@drawable/emoji_happy" />
-
-            <ProgressBar
-                android:id="@+id/activity_emotion_statistics_pb4"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:layout_row="0"
-                android:layout_column="1"
-                android:layout_gravity="center"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:max="9" />
-
-            <TextView
-                android:id="@+id/activity_emotion_statistics_tv4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_row="0"
-                android:layout_column="2"
-                android:layout_gravity="center"
-                android:layout_marginStart="20dp"
-                android:text="@string/activity_emotion_statistics_rvTextView" />
-
-            <ImageView
-                android:id="@+id/activity_emotion_statistics_5"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_row="1"
-                android:layout_column="0"
-                android:layout_gravity="center"
-                android:layout_marginTop="16dp"
-                android:src="@drawable/emoji_happy" />
-
-            <ProgressBar
-                android:id="@+id/activity_emotion_statistics_pb5"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:layout_row="1"
-                android:layout_column="1"
-                android:layout_gravity="center"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="20dp"
-                android:max="9" />
-
-            <TextView
-                android:id="@+id/activity_emotion_statistics_tv5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_row="1"
-                android:layout_column="2"
-                android:layout_gravity="center"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="16dp"
-                android:text="@string/activity_emotion_statistics_rvTextView" />
-
-            <ImageView
-                android:id="@+id/activity_emotion_statistics_6"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_row="2"
-                android:layout_column="0"
-                android:layout_gravity="center"
-                android:layout_marginTop="16dp"
-                android:src="@drawable/emoji_happy" />
-
-            <ProgressBar
-                android:id="@+id/activity_emotion_statistics_pb6"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:layout_row="2"
-                android:layout_column="1"
-                android:layout_gravity="center"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="20dp"
-                android:max="9" />
-
-            <TextView
-                android:id="@+id/activity_emotion_statistics_tv6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_row="2"
-                android:layout_column="2"
-                android:layout_gravity="center"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="16dp"
-                android:text="@string/activity_emotion_statistics_rvTextView" />
-
-            <ImageView
-                android:id="@+id/activity_emotion_statistics_7"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_row="3"
-                android:layout_column="0"
-                android:layout_gravity="center"
-                android:layout_marginTop="16dp"
-                android:src="@drawable/emoji_happy" />
-
-            <ProgressBar
-                android:id="@+id/activity_emotion_statistics_pb7"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:layout_row="3"
-                android:layout_column="1"
-                android:layout_gravity="center"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="20dp"
-                android:max="9" />
-
-            <TextView
-                android:id="@+id/activity_emotion_statistics_tv7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_row="3"
-                android:layout_column="2"
-                android:layout_gravity="center"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="16dp"
-                android:text="@string/activity_emotion_statistics_rvTextView" />
-
-            <ImageView
-                android:id="@+id/activity_emotion_statistics_8"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_row="4"
-                android:layout_column="0"
-                android:layout_gravity="center"
-                android:layout_marginTop="16dp"
-                android:src="@drawable/emoji_happy" />
-
-            <ProgressBar
-                android:id="@+id/activity_emotion_statistics_pb8"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:layout_row="4"
-                android:layout_column="1"
-                android:layout_gravity="center"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="20dp"
-                android:max="9" />
-
-            <TextView
-                android:id="@+id/activity_emotion_statistics_tv8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_row="4"
-                android:layout_column="2"
-                android:layout_gravity="center"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="16dp"
-                android:text="@string/activity_emotion_statistics_rvTextView" />
-
-            <ImageView
-                android:id="@+id/activity_emotion_statistics_9"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_row="5"
-                android:layout_column="0"
-                android:layout_gravity="center"
-                android:layout_marginTop="16dp"
-                android:src="@drawable/emoji_happy" />
-
-            <ProgressBar
-                android:id="@+id/activity_emotion_statistics_pb9"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:layout_row="5"
-                android:layout_column="1"
-                android:layout_gravity="center"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="20dp"
-                android:max="9" />
-
-            <TextView
-                android:id="@+id/activity_emotion_statistics_tv9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_row="5"
-                android:layout_column="2"
-                android:layout_gravity="center"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="16dp"
-                android:text="@string/activity_emotion_statistics_rvTextView" />
-        </GridLayout>
+            app:layout_constraintTop_toBottomOf="@+id/activity_emotion_statistics_line" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

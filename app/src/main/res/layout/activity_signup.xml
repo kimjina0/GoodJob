@@ -11,7 +11,7 @@
         android:id="@+id/activity_signup_llCharacter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="50dp"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,6 +33,17 @@
             android:text="@string/activity_signup_info" />
     </LinearLayout>
 
+    <!-- Line -->
+    <View
+        android:id="@+id/activity_signup_line"
+        android:layout_width="320dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/line_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activity_signup_llCharacter" />
+
     <!-- User Info Input -->
     <LinearLayout
         android:id="@+id/activity_signup_llUserInfo"
@@ -43,84 +54,106 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/activity_signup_llCharacter">
+        app:layout_constraintTop_toBottomOf="@id/activity_signup_line">
 
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:stretchColumns="*">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center">
 
-            <TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/activity_signup_user_name"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/activity_signup_user_name"
-                    android:textStyle="bold" />
+            <EditText
+                android:id="@+id/activity_signup_etUserName"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/bg_activity_signup_edittext"
+                android:inputType="textPersonName"
+                android:maxLines="1"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp" />
+        </LinearLayout>
 
-                <EditText
-                    android:id="@+id/activity_signup_etUserName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="30dp"
-                    android:layout_span="3"
-                    android:background="@drawable/bg_activity_signup_edittext"
-                    android:inputType="textPersonName"
-                    android:paddingLeft="16dp" />
-            </TableRow>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:gravity="center">
 
-            <TableRow android:layout_marginTop="30dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/activity_signup_user_ID"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/activity_signup_user_ID"
-                    android:textStyle="bold" />
+            <EditText
+                android:id="@+id/activity_signup_etUserID"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/bg_activity_signup_edittext"
+                android:digits="@string/activity_signup_etInputType"
+                android:maxLines="1"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp" />
+        </LinearLayout>
 
-                <EditText
-                    android:id="@+id/activity_signup_etUserID"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="30dp"
-                    android:layout_span="3"
-                    android:background="@drawable/bg_activity_signup_edittext"
-                    android:digits="@string/activity_signup_etInputType"
-                    android:maxLines="1"
-                    android:paddingLeft="16dp" />
-            </TableRow>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:gravity="center">
 
-            <TableRow android:layout_marginTop="30dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/activity_signup_user_password"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/activity_signup_user_password"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/activity_signup_etUserPassword"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="30dp"
-                    android:layout_span="3"
-                    android:background="@drawable/bg_activity_signup_edittext"
-                    android:digits="@string/activity_signup_etInputType"
-                    android:inputType="textPassword"
-                    android:maxLines="1"
-                    android:paddingLeft="16dp" />
-            </TableRow>
-        </TableLayout>
+            <EditText
+                android:id="@+id/activity_signup_etUserPassword"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/bg_activity_signup_edittext"
+                android:digits="@string/activity_signup_etInputType"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp" />
+        </LinearLayout>
 
         <Button
             android:id="@+id/activity_signup_btnSignUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
+            android:backgroundTint="@color/activity_signup_btnSignup"
             android:text="@string/activity_signup_btnSignup" />
     </LinearLayout>
+
+    <!-- Line 2 -->
+    <View
+        android:id="@+id/activity_signup_line2"
+        android:layout_width="320dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="30dp"
+        android:background="@color/line_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activity_signup_llUserInfo" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -141,8 +174,11 @@
             android:id="@+id/activity_signup_btnLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/activity_signup_btnLogin" />
+            android:backgroundTint="@color/white"
+            android:text="@string/activity_signup_btnLogin"
+            android:textColor="@color/activity_signup_btnLoginColor"
+            android:textSize="16sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -21,4 +21,8 @@
     <color name="activity_diary_tvBackground">#E7E7FF</color>
     <color name="activity_diary_tvTextColor">#3D316F</color>
     <color name="activity_diary_tvDateColor">#C5C2C2</color>
+    <!-- activity calendar color -->
+    <color name="activity_calendar_background">#B7CBFF</color>
+    <!-- line color -->
+    <color name="line_color">#3D316F</color>
 </resources>

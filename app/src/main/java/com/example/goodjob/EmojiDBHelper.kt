@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -51,6 +52,7 @@ class EmojiDBHelper(context: Context) :
         return result != -1L
     }
 
+    // 각 Emoji 가 사용된 개수 반환
     fun getEmojiCount(userID: String, year: String, month: String): Array<Emoji> {
         val array =
             arrayOf(
@@ -80,17 +82,21 @@ class EmojiDBHelper(context: Context) :
             while (cursor.moveToNext()) {
                 val moodName = cursor.getString(0)
                 val index = getIndex(moodName)
+                Log.i("emojidb", moodName)
                 if (index == -1) {
                     return array
                 } else {
                     (array[index].emojiCount)++
+                    Log.i("emojidb_count", "${array[index].emojiCount}")
                 }
             }
-            array.sortBy { it.emojiCount }
+            array.sortByDescending { it.emojiCount }
         }
+        cursor.close()
         return array
     }
 
+    // Emoji Name 에 해당 하는 인덱스 반환
     private fun getIndex(emojiName: String): Int {
         var index = -1
         when (emojiName) {
@@ -103,6 +109,7 @@ class EmojiDBHelper(context: Context) :
             "mood_proud" -> index = 6
             "mood_sad" -> index = 7
             "mood_sick" -> index = 8
+            "NULL" -> index = -1
         }
         return index
     }

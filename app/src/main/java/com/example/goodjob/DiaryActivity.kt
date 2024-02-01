@@ -1,5 +1,6 @@
 package com.example.goodjob
 
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
@@ -57,41 +58,55 @@ class DiaryActivity : AppCompatActivity() {
         // Calendar Activity 로부터 사용자 가 선택한 날짜 받아옴
         val date = intent.getStringExtra("date")
         textViewDate.text = date
+
         // Diary 저장 버튼 클릭
         saveButton.setOnClickListener {
             // 입력된 내용 가져옴
             val dateForDiaryDB = intent.getStringExtra("dateForDiaryDB")
+            val yearForEmojiDB = intent.getStringExtra("yearForEmojiDB")
+            val monthForEmojiDB = intent.getStringExtra("monthForEmojiDB")
             val weather = weatherEditText.text.toString()
             val title = editTitle.text.toString()
             val content1 = editText.text.toString()
             val content2 = editText2.text.toString()
-            // 데이터베이스에 저장
-            val success = dbHelper.saveDiary(
-                userID,
-                dateForDiaryDB,
-                weather,
-                title,
-                content1,
-                content2,
-            )
 
-            // 데이터베이스에 저장 여부 메세지 표시
-            if (success) {
-                makeToast("저장되었습니다.")
-            } else {
-                makeToast("저장 실패")
+            // 입력 처리
+            if (weather.isBlank())
+                makeToast("날씨를 입력해주세요.")
+            else if (title.isBlank())
+                makeToast("제목을 입력해주세요.")
+            else if (content1.isBlank())
+                makeToast("내용을 입력해주세요.")
+            else if (content2.isBlank())
+                makeToast("칭찬 내용을 입력해주세요.")
+            else if (moodName == "NULL")
+                makeToast("이모지를 선택해주세요.")
+            else {
+                // 데이터베이스에 저장
+                val success = dbHelper.saveDiary(
+                    userID,
+                    dateForDiaryDB,
+                    weather,
+                    title,
+                    content1,
+                    content2,
+                )
+                val isMoodSaveSuccess = emojiDBHelper.insertData(
+                    userID!!,
+                    moodName,
+                    yearForEmojiDB!!,
+                    monthForEmojiDB!!
+                )
+                // 데이터베이스에 저장 여부 메세지 표시
+                if (success && isMoodSaveSuccess) {
+                    val intent = Intent(this, CalendarActivity::class.java)
+                    makeToast("저장되었습니다.")
+                    startActivity(intent)
+                } else {
+                    makeToast("저장 실패")
+                }
             }
-
         }
-        val yearForEmojiDB = intent.getStringExtra("yearForEmojiDB")
-        val monthForEmojiDB = intent.getStringExtra("monthForEmojiDB")
-        var isSuccess = false
-        if (userID != null && yearForEmojiDB != null && monthForEmojiDB != null)
-            isSuccess = emojiDBHelper.insertData(userID, moodName, yearForEmojiDB, monthForEmojiDB)
-        if (isSuccess)
-            makeToast("성공")
-        else
-            makeToast("실패")
     }
 
     private fun showExpressionDialog() {

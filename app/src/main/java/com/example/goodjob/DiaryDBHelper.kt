@@ -63,7 +63,7 @@ class DiaryDBHelper(context: Context) :
         return id != -1L
     }
 
-    // 사용자 별 일기 개수 반환
+    // 사용자 별 총 일기 개수 반환
     fun getDiaryCount(userID: String): Int {
         val db = this.readableDatabase
         val cursor = db.query(
