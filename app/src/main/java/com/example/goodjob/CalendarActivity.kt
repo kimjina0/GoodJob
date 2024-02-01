@@ -1,22 +1,13 @@
 package com.example.goodjob
 
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
-import android.database.sqlite.SQLiteOpenHelper
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.CalendarView
-import android.widget.CalendarView.OnDateChangeListener
-import android.widget.ImageView
-import android.widget.SearchView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -25,21 +16,26 @@ import com.google.android.material.navigation.NavigationView
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView
 import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Date
 import java.util.Locale
 
 class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+    private lateinit var usersDBHelper: UsersDBHelper
+    private lateinit var sqLiteDatabase: SQLiteDatabase
+    private lateinit var diaryDBHelper: DiaryDBHelper
 
     private lateinit var binding: ActivityCalendarBinding
+
     private lateinit var calendarView: MaterialCalendarView
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navigationView: NavigationView
+
     private lateinit var toolbar: androidx.appcompat.widget.Toolbar
+
     private lateinit var userName: String
     private lateinit var userID: String
     private lateinit var spf: SharedPreferences
     private var toast: Toast? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
