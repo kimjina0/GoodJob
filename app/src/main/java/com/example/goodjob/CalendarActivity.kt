@@ -23,6 +23,10 @@ import com.example.goodjob.databinding.ActivityCalendarBinding
 import com.google.android.material.navigation.NavigationView
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 
 class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -47,7 +51,7 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         navigationView = binding.activityCalendarNV
         toolbar = binding.activityCalendarTb
         calendarView = binding.activityCalendarCalendarView
-        calendarView.setSelectedDate(CalendarDay.today())
+        calendarView.selectedDate = CalendarDay.today()
         spf = getSharedPreferences("user_info", MODE_PRIVATE)
 
         // 네비게이션 드로어 사용 설정
@@ -67,29 +71,17 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         //받아온 ID를 변수로 저장
         userID = spf.getString("userID", "UNKNOWN")!!
 
-//        sqLiteDatabase = dbHelper.readableDatabase
-
-//        var cursor: Cursor
-//        cursor = sqLiteDatabase.rawQuery("SELECT ... (일기 데이터 부분)")
-
-//        다이어리 작성 유무에 따라 캘린더에 시각화.(기분 아이콘)
-//            다이어리 DB, 날짜 확인
-//            if (그 날짜에 작성된 일기가 있다면)...
-
-//        날짜 선택 시, 각종 정보 전달 + 다이어리 화면으로 전환. (이를 받은 다이어리 액티비티가 각 DB에 접근.)
-//        calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
-//
-//            //var intent = Intent(this, DiaryActivity::class.java)
-//
-//            //전달될 정보
-//            //intent.putExtra("userID", userID)
-//            intent.putExtra("year", year)
-//            intent.putExtra("month", month)
-//            intent.putExtra("dayOfMonth", dayOfMonth)
-//
-//            //화면 전환
-//            startActivity(intent)
-//        }
+        // 캘린더 날짜 선택 시, DiaryActivity 전환
+        calendarView.setOnDateChangedListener { _, date, selected ->
+            if (selected) {
+                val intent = Intent(this, DiaryActivity::class.java)
+                val dateFormat = SimpleDateFormat("yyyy년 M월 d일", Locale.getDefault())
+                val dateForDiaryDBFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                intent.putExtra("date", dateFormat.format(date))
+                intent.putExtra("dateForDiaryDB", dateForDiaryDBFormat.format(date))
+                startActivity(intent)
+            }
+        }
     }
 
     // 네비게이션 드로어 관련 메소드

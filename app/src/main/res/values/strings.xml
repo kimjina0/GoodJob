@@ -15,6 +15,8 @@
     <string name="activity_emotion_statistics_tvSecond">2위</string>
     <string name="activity_emotion_statistics_tvThird">3위</string>
     <string name="activity_emotion_statistics_rvTextView">N개</string>
+    <string name="activity_emotion_statistics_btnNext">다음</string>
+    <string name="activity_emotion_statistics_btnPrevious">이전</string>
     <!-- activity badge -->
     <string name="activity_badge_info">노려라! \n 칭찬 마스터!</string>
     <string name="activity_badge_info2">칭찬 마스터가 되면 하늘이 맑게 갤 거예요.</string>
@@ -32,4 +34,11 @@
     <string name="navi_menu_item_calendar">캘린더</string>
     <string name="navi_menu_item_emotion_statistics">월별 감정 통계</string>
     <string name="navi_menu_item_badge">배지 달성</string>
+    <!-- activity diary -->
+    <string name="activity_diary_tvDate">년 월 일</string>
+    <string name="activity_diary_htWeather">날씨</string>
+    <string name="activity_diary_htTitle">제목</string>
+    <string name="activity_diary_htContent">내용</string>
+    <string name="activity_diary_tvInfo">오늘의 자신을 칭찬해주세요!</string>
+    <string name="activity_diary_btnSave">저장</string>
 </resources>

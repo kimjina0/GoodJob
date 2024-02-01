@@ -9,16 +9,30 @@ import java.util.Date
 import java.util.Locale
 
 class UsersDBHelper(context: Context?) :
-    SQLiteOpenHelper(context, "Users.db", null, 1) {
+    SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
+    companion object {
+        private const val DATABASE_VERSION = 1
+        private const val DATABASE_NAME = "Users.db"
+        private const val TABLE_NAME = "Users"
+        private const val COLUMN_ID = "column_id"
+        private const val COLUMN_USER_NAME = "user_name"
+        private const val COLUMN_USER_ID = "user_id"
+        private const val COLUMN_USER_PASSWORD = "user_password"
+        private const val COLUMN_START_DATE = "start_date"
+    }
     override fun onCreate(signUpDB: SQLiteDatabase?) {
-        signUpDB?.execSQL("CREATE TABLE " +
-                "Users (user_pk INTEGER PRIMARY KEY AUTOINCREMENT," +
-                " user_name TEXT NOT NULL, user_ID TEXT NOT NULL," +
-                " user_password TEXT NOT NULL, start_date TEXT NOT NULL);")
+        val sqlCreateTable = ("CREATE TABLE $TABLE_NAME (" +
+                "$COLUMN_ID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "$COLUMN_USER_NAME TEXT NOT NULL," +
+                "$COLUMN_USER_ID TEXT NOT NULL," +
+                "$COLUMN_USER_PASSWORD TEXT NOT NULL," +
+                "$COLUMN_START_DATE TEXT NOT NULL);")
+        signUpDB?.execSQL(sqlCreateTable)
     }
 
     override fun onUpgrade(signUpDB: SQLiteDatabase?, p1: Int, p2: Int) {
-        signUpDB!!.execSQL("DROP TABLE IF EXISTS User")
+        val sqlDropTable = ("DROP TABLE IF EXISTS $TABLE_NAME")
+        signUpDB!!.execSQL(sqlDropTable)
     }
 
     // Users Table 에 데이터 삽입
@@ -26,12 +40,12 @@ class UsersDBHelper(context: Context?) :
         val signUpDB = this.writableDatabase
         val date = Date() // 가입 날짜 저장 하기 위한 변수
         val values = ContentValues().apply {
-            put("user_name", userName)
-            put("user_ID", userID)
-            put("user_password", userPassword)
-            put("start_date", SimpleDateFormat("yyyy-MM-dd", Locale.KOREA).format(date))
+            put(COLUMN_USER_NAME, userName)
+            put(COLUMN_USER_ID, userID)
+            put(COLUMN_USER_PASSWORD, userPassword)
+            put(COLUMN_START_DATE, SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(date))
         }
-        val result = signUpDB?.insert("Users", null, values)
+        val result = signUpDB?.insert(TABLE_NAME, null, values)
         signUpDB.close()
         // insert() : 오류 발생 시 -1L 리턴
         return result != -1L
@@ -41,9 +55,9 @@ class UsersDBHelper(context: Context?) :
     fun checkUserID(userID: String): Boolean {
         val signUpDB = this.readableDatabase
         val cursor = signUpDB.query(
-            "Users", // 테이블
-            arrayOf("user_ID"), // 리턴 받고자 하는 칼럼 값의 배열
-            "user_ID = ?", // WHERE 조건
+            TABLE_NAME, // 테이블
+            arrayOf(COLUMN_USER_ID), // 리턴 받고자 하는 칼럼 값의 배열
+            "$COLUMN_USER_ID = ?", // WHERE 조건
             arrayOf(userID), // WHERE 조건에 해당 하는 값의 배열
             null, // GROUP BY 조건
             null, // HAVING BY 조건
@@ -60,9 +74,9 @@ class UsersDBHelper(context: Context?) :
     fun login(userID: String, userPassword: String) : String {
         val loginDB = this.readableDatabase
         val cursor = loginDB.query(
-            "Users",
-            arrayOf("user_name"),
-            "user_ID = ? AND user_password = ?",
+            TABLE_NAME,
+            arrayOf(COLUMN_USER_NAME),
+            "$COLUMN_USER_ID = ? AND $COLUMN_USER_PASSWORD = ?",
             arrayOf(userID, userPassword),
             null,
             null,

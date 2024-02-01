@@ -4,101 +4,120 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/date"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/activity_diary_tvTextColor">
 
     <ImageView
         android:id="@+id/activity_diary_image"
-        android:layout_width="85dp"
+        android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginBottom="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/activity_diary_edtDate"
-        tools:layout_editor_absoluteX="163dp"
+        android:layout_marginTop="10dp"
         android:src="@android:drawable/ic_menu_add"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/activity_diary_edtDate"
+    <LinearLayout
+        android:id="@+id/activity_diary_ll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="년 월 일"
-        android:inputType="date"
-        tools:layout_editor_absoluteX="51dp"
-        tools:layout_editor_absoluteY="132dp"
-        tools:ignore="MissingConstraints" />
-
-    <EditText
-        android:id="@+id/activity_diary_edtWeather"
-        android:layout_width="82dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="224dp"
-        android:ems="10"
-        android:hint="날씨"
-        android:inputType="text"
-        app:layout_constraintStart_toStartOf="@+id/activity_diary_edtDate"
-        tools:layout_editor_absoluteY="132dp"
-        tools:ignore="MissingConstraints" />
-
-    <EditText
-        android:id="@+id/activity_diary_edtText"
-        android:layout_width="314dp"
-        android:layout_height="234dp"
-        android:layout_marginBottom="240dp"
-        android:ems="10"
-        android:gravity="start|top"
-        android:hint="내용"
-        android:inputType="textMultiLine"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.536"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activity_diary_image">
 
+        <TextView
+            android:id="@+id/activity_diary_tvDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="100dp"
+            android:text="@string/activity_diary_tvDate"
+            android:textColor="@color/activity_diary_tvDateColor" />
 
+        <EditText
+            android:id="@+id/activity_diary_edtWeather"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/activity_diary_htWeather"
+            android:inputType="text"
+            android:textColorHint="@color/activity_diary_tvDateColor" />
+    </LinearLayout>
 
-    <EditText
-        android:id="@+id/activity_diary_edtTitle"
-        android:layout_width="310dp"
-        android:layout_height="53dp"
-        android:layout_marginBottom="5dp"
-        android:ems="10"
-        android:hint="제목"
-        android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/activity_diary_edtText"
-        tools:layout_editor_absoluteX="52dp"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/activity_diary_TextView"
-        android:layout_width="250dp"
-        android:layout_height="30dp"
-        android:layout_marginBottom="3dp"
-        android:text="오늘의 자신을 칭찬해주세요!"
-        android:textColor="#554747"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/activity_diary_edtText2"
-        tools:layout_editor_absoluteX="51dp"
-        tools:ignore="MissingConstraints" />
-
-    <EditText
-        android:id="@+id/activity_diary_edtText2"
-        android:layout_width="314dp"
-        android:layout_height="155dp"
-        android:layout_marginBottom="40dp"
-        android:ems="10"
-        android:gravity="start|top"
-        android:hint="내용"
-        android:inputType="textMultiLine"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <LinearLayout
+        android:id="@+id/activity_diary_llContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.536"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activity_diary_ll">
 
-    <Button
-        android:id="@+id/activity_diary_btnSave"
-        android:layout_width="79dp"
-        android:layout_height="40dp"
-        android:text="저장"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="330dp"
-        tools:layout_editor_absoluteY="691dp" />
+        <EditText
+            android:id="@+id/activity_diary_edtTitle"
+            android:layout_width="350dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_activity_diary_edittext"
+            android:hint="@string/activity_diary_htTitle"
+            android:inputType="text"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp" />
+
+        <EditText
+            android:id="@+id/activity_diary_edtText"
+            android:layout_width="350dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/bg_activity_diary_edittext_content"
+            android:hint="@string/activity_diary_htContent"
+            android:inputType="textMultiLine"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/activity_diary_llContent2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/activity_diary_llContent">
+
+        <TextView
+            android:id="@+id/activity_diary_TextView"
+            android:layout_width="350dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_activity_diary_textview"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:text="@string/activity_diary_tvInfo"
+            android:textColor="@color/activity_diary_tvTextColor"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/activity_diary_edtText2"
+            android:layout_width="350dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_activity_diary_edittext_content"
+            android:hint="@string/activity_diary_htContent"
+            android:inputType="textMultiLine"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp" />
+
+        <Button
+            android:id="@+id/activity_diary_btnSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/activity_diary_btnSave" />
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
