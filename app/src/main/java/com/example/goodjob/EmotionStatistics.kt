@@ -13,6 +13,7 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.goodjob.databinding.ActivityEmotionStatisticsBinding
 import com.google.android.material.navigation.NavigationView
+import com.prolificinteractive.materialcalendarview.CalendarDay
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -29,7 +30,10 @@ class EmotionStatistics : AppCompatActivity(), NavigationView.OnNavigationItemSe
     private lateinit var nextBtn: Button
     private lateinit var previousBtn: Button
     private lateinit var diaryDBHelper: DiaryDBHelper
+    private lateinit var EmojiDBHelper: EmojiDBHelper
     private lateinit var spf: SharedPreferences
+    private var monthText: String = "NULL"
+    private var date: String = "yyyyMM"
     private var toast: Toast? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,34 +63,47 @@ class EmotionStatistics : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
         // 현재 Month 로 설정
         val monthFormat = SimpleDateFormat("M월", Locale.getDefault())
+        val dateFormat = SimpleDateFormat("yyyyMM", Locale.getDefault())
+        val yearForEmojiDBFormat = SimpleDateFormat("yyyy", Locale.getDefault())
+        val monthForEmojiDBFormat = SimpleDateFormat("M", Locale.getDefault())
         val calendar = Calendar.getInstance()
         calendar.time = Date()
-        var month = monthFormat.format(calendar.time)
+        val year = yearForEmojiDBFormat.format(date)
+        val month = monthForEmojiDBFormat.format(date)
+        monthText = monthFormat.format(calendar.time)
+        date = dateFormat.format(calendar.time)
         monthTV.text = month
 
         // 다음 버튼 클릭 시, 다음 달로 이동
         nextBtn.setOnClickListener {
             calendar.add(Calendar.MONTH, 1)
-            month = monthFormat.format(calendar.time)
+            monthText = monthFormat.format(calendar.time)
+            date = dateFormat.format(calendar.time)
             monthTV.text = month
         }
 
         // 이전 버튼 클릭 시, 이전 달로 이동
         previousBtn.setOnClickListener {
             calendar.add(Calendar.MONTH, -1)
-            month = monthFormat.format(calendar.time)
+            monthText = monthFormat.format(calendar.time)
+            date = dateFormat.format(calendar.time)
             monthTV.text = month
         }
 
         // 이모지 가져 오기
         userID = spf.getString("userID", "UNKNOWN")!!
         diaryDBHelper = DiaryDBHelper(this)
+        EmojiDBHelper = EmojiDBHelper(this)
         if (diaryDBHelper.getDiaryCount(userID) == 0)
             Toast.makeText(this, "작성된 일기가 없습니다.", Toast.LENGTH_SHORT).show()
         else {
-            val rank = getRanking(diaryDBHelper)
-            val drawableID = getDrawableID(rank[0].moodName)
-            binding.activityEmotionStatisticsIvFirst.setImageResource(drawableID)
+            val ranking = EmojiDBHelper.getEmojiCount(userID, year, month)
+            val first = getDrawableID(ranking[0].emojiName)
+            val second = getDrawableID(ranking[1].emojiName)
+            val third = getDrawableID(ranking[2].emojiName)
+            binding.activityEmotionStatisticsIvFirst.setImageResource(first)
+            binding.activityEmotionStatisticsIvSecond.setImageResource(second)
+            binding.activityEmotionStatisticsIvThird.setImageResource(third)
         }
     }
 
@@ -135,49 +152,20 @@ class EmotionStatistics : AppCompatActivity(), NavigationView.OnNavigationItemSe
         super.onStop()
         toast?.cancel()
     }
+}
 
-    // 이모지 순위 반환 메소드
-    private fun getRanking(diaryDBHelper: DiaryDBHelper): Array<Mood> {
-        val angryCount = diaryDBHelper.getMoodCount(userID, "mood_angry")
-        val basicCount = diaryDBHelper.getMoodCount(userID, "mood_basic")
-        val bestCount = diaryDBHelper.getMoodCount(userID, "mood_best")
-        val dejectedCount = diaryDBHelper.getMoodCount(userID, "mood_dejected")
-        val depressionCount = diaryDBHelper.getMoodCount(userID, "mood_depression")
-        val happyCount = diaryDBHelper.getMoodCount(userID, "mood_happy")
-        val proudCount = diaryDBHelper.getMoodCount(userID, "mood_proud")
-        val sadCount = diaryDBHelper.getMoodCount(userID, "mood_sad")
-        val sickCount = diaryDBHelper.getMoodCount(userID, "mood_sick")
-
-        val ranking = arrayOf(
-            Mood("mood_angry", angryCount),
-            Mood("mood_basic", basicCount),
-            Mood("mood_best", bestCount),
-            Mood("mood_dejected", dejectedCount),
-            Mood("mood_depression", depressionCount),
-            Mood("mood_happy", happyCount),
-            Mood("mood_proud", proudCount),
-            Mood("mood_sad", sadCount),
-            Mood("mood_sick", sickCount),
-        )
-        ranking.sortByDescending { it.moodCount }
-        return ranking
+private fun getDrawableID(moodName: String): Int {
+    var id: Int = -1
+    when (moodName) {
+        "mood_angry" -> id = R.drawable.emoji_angry
+        "mood_basic" -> id = R.drawable.emoji_basic
+        "mood_best" -> id = R.drawable.emoji_best
+        "mood_dejected" -> id = R.drawable.emoji_dejected
+        "mood_depression" -> id = R.drawable.emoji_depression
+        "mood_happy" -> id = R.drawable.emoji_happy
+        "mood_proud" -> id = R.drawable.emoji_proud
+        "mood_sad" -> id = R.drawable.emoji_sad
+        "mood_sick" -> id = R.drawable.emoji_sick
     }
-
-    private fun getDrawableID(moodName: String): Int {
-        var id: Int = -1
-        when (moodName) {
-            "mood_angry" -> id = R.drawable.emoji_angry
-            "mood_basic" -> id = R.drawable.emoji_basic
-            "mood_best" -> id = R.drawable.emoji_best
-            "mood_dejected" -> id = R.drawable.emoji_dejected
-            "mood_depression" -> id = R.drawable.emoji_depression
-            "mood_happy" -> id = R.drawable.emoji_happy
-            "mood_proud" -> id = R.drawable.emoji_proud
-            "mood_sad" -> id =  R.drawable.emoji_sad
-            "mood_sick" -> id =  R.drawable.emoji_sick
-        }
-        return id
-    }
-
-    data class Mood(val moodName: String, val moodCount: Int)
+    return id
 }

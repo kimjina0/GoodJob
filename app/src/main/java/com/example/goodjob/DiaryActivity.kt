@@ -2,6 +2,7 @@ package com.example.goodjob
 
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -14,6 +15,9 @@ import com.example.goodjob.databinding.ActivityDiaryBinding
 
 class DiaryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDiaryBinding
+    private lateinit var dbHelper: DiaryDBHelper
+    private lateinit var emojiDBHelper: EmojiDBHelper
+    private lateinit var spf: SharedPreferences
     private lateinit var imageView: ImageView
     private lateinit var textViewDate: TextView
     private lateinit var weatherEditText: EditText
@@ -21,10 +25,9 @@ class DiaryActivity : AppCompatActivity() {
     private lateinit var editText: EditText
     private lateinit var editText2: EditText
     private lateinit var saveButton: Button
-    private lateinit var moodName: String
-    private lateinit var spf: SharedPreferences
+    private var moodName: String = "NULL"
     private var alertDialog: AlertDialog? = null
-    private lateinit var dbHelper: DiaryDBHelper
+    private var toast: Toast? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,35 +45,53 @@ class DiaryActivity : AppCompatActivity() {
 
         // dbHelper 초기화
         dbHelper = DiaryDBHelper(this)
+        emojiDBHelper = EmojiDBHelper(this)
 
         imageView.setOnClickListener {
             showExpressionDialog()
         }
+
         // userID 가져 오기
         val userID = spf.getString("userID", "UNKNOWN")
 
         // Calendar Activity 로부터 사용자 가 선택한 날짜 받아옴
         val date = intent.getStringExtra("date")
         textViewDate.text = date
-
         // Diary 저장 버튼 클릭
         saveButton.setOnClickListener {
             // 입력된 내용 가져옴
+            val dateForDiaryDB = intent.getStringExtra("dateForDiaryDB")
             val weather = weatherEditText.text.toString()
             val title = editTitle.text.toString()
             val content1 = editText.text.toString()
             val content2 = editText2.text.toString()
-
             // 데이터베이스에 저장
-            val success = dbHelper.saveDiary(userID, date, weather, title, content1, content2, moodName)
+            val success = dbHelper.saveDiary(
+                userID,
+                dateForDiaryDB,
+                weather,
+                title,
+                content1,
+                content2,
+            )
 
             // 데이터베이스에 저장 여부 메세지 표시
             if (success) {
-                Toast.makeText(this, "저장되었습니다.", Toast.LENGTH_SHORT).show()
+                makeToast("저장되었습니다.")
             } else {
-                Toast.makeText(this, "저장 실패", Toast.LENGTH_SHORT).show()
+                makeToast("저장 실패")
             }
+
         }
+        val yearForEmojiDB = intent.getStringExtra("yearForEmojiDB")
+        val monthForEmojiDB = intent.getStringExtra("monthForEmojiDB")
+        var isSuccess = false
+        if (userID != null && yearForEmojiDB != null && monthForEmojiDB != null)
+            isSuccess = emojiDBHelper.insertData(userID, moodName, yearForEmojiDB, monthForEmojiDB)
+        if (isSuccess)
+            makeToast("성공")
+        else
+            makeToast("실패")
     }
 
     private fun showExpressionDialog() {
@@ -96,5 +117,18 @@ class DiaryActivity : AppCompatActivity() {
 
         // 마지막으로 선택된 이미지의 리소스 ID 저장
         moodName = view.resources.getResourceEntryName(view.id)
+    }
+
+    // Activity 종료 시, Toast message 취소
+    override fun onStop() {
+        super.onStop()
+        toast?.cancel()
+    }
+
+    // Toast message 생성 함수
+    private fun makeToast(message: String) {
+        toast?.cancel()
+        toast = Toast.makeText(this, message, Toast.LENGTH_SHORT)
+        toast?.show()
     }
 }

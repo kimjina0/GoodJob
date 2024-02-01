@@ -21,13 +21,12 @@ class DiaryDBHelper(context: Context) :
         private const val COLUMN_TITLE = "title"
         private const val COLUMN_CONTENT1 = "content1"
         private const val COLUMN_CONTENT2 = "content2"
-        private const val COLUMN_MOOD_NAME = "moodName"
     }
 
     //데이터 베이스 생성
     override fun onCreate(db: SQLiteDatabase) {
         val CREATE_TABLE =
-            ("CREATE TABLE $TABLE_NAME ($COLUMN_ID INTEGER PRIMARY KEY AUTOINCREMENT, $COLUMN_USER_ID TEXT, $COLUMN_DATE TEXT, $COLUMN_WEATHER TEXT, $COLUMN_TITLE TEXT, $COLUMN_CONTENT1 TEXT, $COLUMN_CONTENT2 TEXT, $COLUMN_MOOD_NAME TEXT)")
+            ("CREATE TABLE $TABLE_NAME ($COLUMN_ID INTEGER PRIMARY KEY AUTOINCREMENT, $COLUMN_USER_ID TEXT, $COLUMN_DATE TEXT, $COLUMN_WEATHER TEXT, $COLUMN_TITLE TEXT, $COLUMN_CONTENT1 TEXT, $COLUMN_CONTENT2 TEXT);")
         db.execSQL(CREATE_TABLE)
     }
 
@@ -37,25 +36,6 @@ class DiaryDBHelper(context: Context) :
         onCreate(db)
     }
 
-
-    // 사용자 별 이미지 사용 횟수 가져 오기
-    fun getMoodCount(userID: String, moodName: String): Int{
-        val db = this.readableDatabase
-        val cursor = db.query(
-            TABLE_NAME,
-            arrayOf(COLUMN_USER_ID),
-            "$COLUMN_USER_ID = ? AND $COLUMN_MOOD_NAME",
-            arrayOf(userID, moodName),
-            null,
-            null,
-            null
-        )
-        val cursorCount = cursor.count
-        db.close()
-        cursor.close()
-        return cursorCount
-    }
-
     //일기 저장
     fun saveDiary(
         userID: String?,
@@ -63,8 +43,7 @@ class DiaryDBHelper(context: Context) :
         weather: String,
         title: String,
         content1: String,
-        content2: String,
-        moodName: String
+        content2: String
     ): Boolean {
         val values = ContentValues()
         values.put(COLUMN_USER_ID, userID)
@@ -73,7 +52,6 @@ class DiaryDBHelper(context: Context) :
         values.put(COLUMN_TITLE, title)
         values.put(COLUMN_CONTENT1, content1)
         values.put(COLUMN_CONTENT2, content2)
-        values.put(COLUMN_MOOD_NAME, moodName)
 
         //쓸 수 있는 데이터베이스 가져옴
         val db = this.writableDatabase

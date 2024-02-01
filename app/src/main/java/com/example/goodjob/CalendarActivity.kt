@@ -7,6 +7,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.CalendarView
@@ -30,8 +31,6 @@ import java.util.Locale
 
 class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-    private lateinit var dbHelper: UsersDBHelper
-    private lateinit var sqLiteDatabase: SQLiteDatabase
     private lateinit var binding: ActivityCalendarBinding
     private lateinit var calendarView: MaterialCalendarView
     private lateinit var drawerLayout: DrawerLayout
@@ -72,13 +71,18 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         userID = spf.getString("userID", "UNKNOWN")!!
 
         // 캘린더 날짜 선택 시, DiaryActivity 전환
+        val intent = Intent(this, DiaryActivity::class.java)
+        val dateFormat = SimpleDateFormat("yyyy년 M월 d일", Locale.getDefault())
+        val dateForDiaryDBFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val yearForEmojiDBFormat = SimpleDateFormat("yyyy", Locale.getDefault())
+        val monthForEmojiDBFormat = SimpleDateFormat("M", Locale.getDefault())
+        // 날짜 선택 이벤트 메소드
         calendarView.setOnDateChangedListener { _, date, selected ->
             if (selected) {
-                val intent = Intent(this, DiaryActivity::class.java)
-                val dateFormat = SimpleDateFormat("yyyy년 M월 d일", Locale.getDefault())
-                val dateForDiaryDBFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-                intent.putExtra("date", dateFormat.format(date))
-                intent.putExtra("dateForDiaryDB", dateForDiaryDBFormat.format(date))
+                intent.putExtra("date", dateFormat.format(date.date))
+                intent.putExtra("dateForDiaryDB", dateForDiaryDBFormat.format(date.date))
+                intent.putExtra("yearForEmojiDB", yearForEmojiDBFormat.format(date.date))
+                intent.putExtra("monthForEmojiDB", monthForEmojiDBFormat.format(date.date))
                 startActivity(intent)
             }
         }
