@@ -68,29 +68,35 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         //받아온 ID를 변수로 저장
         userID = spf.getString("userID", "UNKNOWN")!!
 
-        val calList = ArrayList<CalendarDay>()
-        sqLiteDatabase = diaryDBHelper.readableDatabase
-        var cursor: Cursor
-        cursor = sqLiteDatabase.rawQuery("SELECT * FROM diary WHERE user_id = '"+userID+"';", null)
+        diaryDBHelper = DiaryDBHelper(this)
 
-        var index = cursor.getColumnIndex("date")
-
-        if(index>=0)   //저장된 일기가 있는 경우에
+        if(diaryDBHelper.getDiaryCount(userID) > 0)   //저장된 일기가 있는 경우
         {
+            sqLiteDatabase = diaryDBHelper.readableDatabase
+            var cursor = sqLiteDatabase.rawQuery(
+                "SELECT * FROM diary WHERE user_id = '" + userID + "';",
+                null
+            )
+            val calList = ArrayList<CalendarDay>()
+
+            var index = 0
+
+            //여기 실행할 때 오류
             while(cursor.moveToNext()){
-                var day = cursor.getString(index).toString()
-                var splitedDay = day.split('-')
-                calList.add(CalendarDay.from(splitedDay[0].toInt(), splitedDay[1].toInt(), splitedDay[2].toInt()))
+                var date = cursor.getString(index).toString()
+                var splitedDate = date.split('-')
+                calList.add(CalendarDay.from(splitedDate[0].toInt(), splitedDate[1].toInt(), splitedDate[2].toInt()))
             }
 
             for(calDay in calList){
                 calendarView.addDecorator(EventDecorator(Collections.singleton(calDay)))
             }
+
+            //사용한 것들 닫기
+            cursor.close()
+            sqLiteDatabase.close()
+            diaryDBHelper.close()
         }
-        //사용한 것들 닫기
-        cursor.close()
-        sqLiteDatabase.close()
-        diaryDBHelper.close()
 
         // 캘린더 날짜 선택 시, DiaryActivity 전환
         val intent = Intent(this, DiaryActivity::class.java)
@@ -98,6 +104,7 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         val dateForDiaryDBFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         val yearForEmojiDBFormat = SimpleDateFormat("yyyy", Locale.getDefault())
         val monthForEmojiDBFormat = SimpleDateFormat("M", Locale.getDefault())
+
         // 날짜 선택 이벤트 메소드
         calendarView.setOnDateChangedListener { _, date, selected ->
             if (selected) {

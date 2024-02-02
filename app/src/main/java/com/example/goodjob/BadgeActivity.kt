@@ -71,8 +71,8 @@ class BadgeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         userID = spf.getString("userID", "UNKNOWN")!!
 
         //일기 작성 일수 불러오기
+        diaryDBHelper = DiaryDBHelper(this)
         var diaryCount = diaryDBHelper.getDiaryCount(userID)
-        badgeUnlock(diaryCount)
 
         //텍스트 색상 초기화
         textView3days.setTextColor(Color.LTGRAY)
@@ -81,41 +81,41 @@ class BadgeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         textView66days.setTextColor(Color.LTGRAY)
         textView100days.setTextColor(Color.LTGRAY)
 
-        //badgeUnlock(days)
+        badgeUnlock(diaryCount)
     }
 
     //배지 텍스트 색상 변경, 토스트 메시지 설정
-    fun badgeUnlock(days: Int) {
+    fun badgeUnlock(diaryCount: Int) {
 
-        if (days < 3) {
-            makeToast("이제 시작이에요! '작심삼일' 달성까지 ${3 - days}일 남았어요!")
+        if (diaryCount < 3) {
+            makeToast("이제 시작이에요! '작심삼일' 달성까지 ${3 - diaryCount}일 남았어요!")
         }
 
-        if (days >= 3) {
-            makeToast("'칭찬 스타터' 달성까지 ${7 - days}일 남았어요.")
+        if (diaryCount >= 3) {
+            makeToast("'칭찬 스타터' 달성까지 ${7 - diaryCount}일 남았어요.")
             textView3days.text = "3일을 넘긴 당신! 멋져요! 시작할 준비가 되었군요!"
             textView3days.setTextColor(Color.BLACK)
         }
 
-        if (days >= 7) {
-            makeToast("당신은 칭찬 스타터! '칭찬 주니어' 달성까지 ${21 - days}일 남았어요.")
+        if (diaryCount >= 7) {
+            makeToast("당신은 칭찬 스타터! '칭찬 주니어' 달성까지 ${21 - diaryCount}일 남았어요.")
             textView1week.text = "7일을 넘긴 당신! 일주일간 노력했군요!"
             textView1week.setTextColor(Color.BLACK)
         }
 
-        if (days >= 21) {
-            makeToast("당신은 칭찬 주니어! '칭찬 시니어' 달성까지 ${66 - days}일 남았어요.")
+        if (diaryCount >= 21) {
+            makeToast("당신은 칭찬 주니어! '칭찬 시니어' 달성까지 ${66 - diaryCount}일 남았어요.")
             textView21days.text = "21일간 열심히 한 멋진 당신! 행동이 습관화가 되었어요!"
             textView21days.setTextColor(Color.BLACK)
         }
 
-        if (days >= 66) {
-            makeToast("당신은 칭찬 시니어! '칭찬 마스터' 달성까지 ${100 - days}일 남았어요.")
+        if (diaryCount >= 66) {
+            makeToast("당신은 칭찬 시니어! '칭찬 마스터' 달성까지 ${100 - diaryCount}일 남았어요.")
             textView66days.text = "66일간 열심히 한 당신! 습관이 자리를 잡았네요."
             textView66days.setTextColor(Color.BLACK)
         }
 
-        if (days >= 100) {
+        if (diaryCount >= 100) {
             makeToast("당신은 칭찬 마스터!!!")
             textView100days.text = "100일간 노력했네요! 당신은 100일 전보다 훨씬 멋있어졌을 거예요!"
             textView100days.setTextColor(Color.BLACK)
