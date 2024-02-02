@@ -80,8 +80,6 @@ class EmotionStatistics : AppCompatActivity(), NavigationView.OnNavigationItemSe
         else {
             val ranking = emojiDBHelper.getEmojiCount(userID, year, month)
             val first = getDrawableID(ranking[0].emojiName)
-            Log.i("ranking[0]", "${ranking[0].emojiName} + ${ranking[0].emojiCount}")
-            Log.i("ranking[8]", "${ranking[8].emojiName} + ${ranking[8].emojiCount}")
             val second = getDrawableID(ranking[1].emojiName)
             val third = getDrawableID(ranking[2].emojiName)
             val rvAdapter = RecyclerViewAdapter(ranking)
