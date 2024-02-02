@@ -2,6 +2,7 @@ package com.example.goodjob
 
 import android.content.Intent
 import android.content.SharedPreferences
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.view.Menu
@@ -16,6 +17,7 @@ import com.google.android.material.navigation.NavigationView
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView
 import java.text.SimpleDateFormat
+import java.util.Collections
 import java.util.Locale
 
 class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -65,6 +67,30 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
 
         //받아온 ID를 변수로 저장
         userID = spf.getString("userID", "UNKNOWN")!!
+
+        val calList = ArrayList<CalendarDay>()
+        sqLiteDatabase = diaryDBHelper.readableDatabase
+        var cursor: Cursor
+        cursor = sqLiteDatabase.rawQuery("SELECT * FROM diary WHERE user_id = '"+userID+"';", null)
+
+        var index = cursor.getColumnIndex("date")
+
+        if(index>=0)   //저장된 일기가 있는 경우에
+        {
+            while(cursor.moveToNext()){
+                var day = cursor.getString(index).toString()
+                var splitedDay = day.split('-')
+                calList.add(CalendarDay.from(splitedDay[0].toInt(), splitedDay[1].toInt(), splitedDay[2].toInt()))
+            }
+
+            for(calDay in calList){
+                calendarView.addDecorator(EventDecorator(Collections.singleton(calDay)))
+            }
+        }
+        //사용한 것들 닫기
+        cursor.close()
+        sqLiteDatabase.close()
+        diaryDBHelper.close()
 
         // 캘린더 날짜 선택 시, DiaryActivity 전환
         val intent = Intent(this, DiaryActivity::class.java)
