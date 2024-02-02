@@ -82,12 +82,10 @@ class EmojiDBHelper(context: Context) :
             while (cursor.moveToNext()) {
                 val moodName = cursor.getString(0)
                 val index = getIndex(moodName)
-                Log.i("emojidb", moodName)
                 if (index == -1) {
                     return array
                 } else {
                     (array[index].emojiCount)++
-                    Log.i("emojidb_count", "${array[index].emojiCount}")
                 }
             }
             array.sortByDescending { it.emojiCount }
